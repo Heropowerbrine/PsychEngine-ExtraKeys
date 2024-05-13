@@ -138,6 +138,10 @@ class Main extends Sprite
 		DiscordClient.prepare();
 		#end
 
+		#if android
+                FlxG.android.preventDefaultKeys = [BACK];
+                #end
+
 		// shader coords fix
 		FlxG.signals.gameResized.add(function (w, h) {
 		     if (FlxG.cameras != null) {
