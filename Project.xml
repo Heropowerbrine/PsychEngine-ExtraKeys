@@ -20,9 +20,9 @@
 	
 	<!-- ______________________ PSYCH ENGINE CUSTOMIZATION ______________________ -->
 
-	<define name="MODS_ALLOWED" if="desktop || android" />
-	<define name="HSCRIPT_ALLOWED" if="desktop || android" />
-	<define name="LUA_ALLOWED" if="desktop || android" />
+	<define name="MODS_ALLOWED" if="desktop" />
+	<define name="HSCRIPT_ALLOWED" if="desktop" />
+	<define name="LUA_ALLOWED" if="desktop" />
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="DISCORD_ALLOWED" if="desktop" />
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
@@ -152,16 +152,6 @@
 	
 	<!--Disable deprecated warnings-->
 	<haxedef name='no-deprecation-warnings' />
-
-	<section if="android">
-		
-	        <!--Target SDK-->
-		<android target-sdk-version="31" />
-
-		<config:android permission="android.permission.MANAGE_EXTERNAL_STORAGE" />
-		<config:android permission="android.permission.REQUEST_INSTALL_PACKAGES" />
-
-	</section>
 
 	<!--Macro fixes-->
 	<haxeflag name="--macro" value="allowPackage('flash')" />
