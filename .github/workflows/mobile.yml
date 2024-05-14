@@ -29,7 +29,6 @@ jobs:
 
       - name: Install Libraries
         run: |
-          haxelib setup ~/haxelib
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
 
@@ -41,7 +40,7 @@ jobs:
           haxelib run lime config ANDROID_SETUP true
 
       - name: Compile
-        run: haxelib run lime build android -D ${{ matrix.storage-type }} -arm64 -final
+        run: haxelib run lime build android -D ${{ matrix.storage-type }} -final
         env:
           cert_pass: nullfunni
           cert_alias_pass: nullfunni
