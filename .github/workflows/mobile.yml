@@ -14,7 +14,7 @@ jobs:
         uses: nttld/setup-ndk@main
         id: setup-ndk
         with:
-          ndk-version: r25c
+          ndk-version: r21e
 
       - name: Setup Java JDK
         uses: actions/setup-java@main
