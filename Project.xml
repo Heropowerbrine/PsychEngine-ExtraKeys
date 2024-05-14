@@ -156,8 +156,12 @@
 	<section if="android">
 	        <certificate path="key.keystore" password="nullfunni" alias="null" alias-password="nullfunni" unless="debug" />
 
-		<!--Target SDK-->
-		<android target-sdk-version="28" if="EXTERNAL || MEDIA"/> 
+	        <!--Target SDK-->
+		<android target-sdk-version="31" />
+
+		<config:android permission="android.permission.MANAGE_EXTERNAL_STORAGE" />
+		<config:android permission="android.permission.REQUEST_INSTALL_PACKAGES" />
+
 	</section>
 
 	<!--Macro fixes-->
