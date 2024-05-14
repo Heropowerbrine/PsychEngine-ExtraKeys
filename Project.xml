@@ -154,8 +154,7 @@
 	<haxedef name='no-deprecation-warnings' />
 
 	<section if="android">
-	        <certificate path="key.keystore" password="nullfunni" alias="null" alias-password="nullfunni" unless="debug" />
-
+		
 	        <!--Target SDK-->
 		<android target-sdk-version="31" />
 
