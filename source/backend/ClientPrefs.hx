@@ -8,6 +8,9 @@ import states.TitleState;
 
 // Add a variable here and it will get automatically saved
 @:structInit class SaveVariables {
+	#if android 
+	public var storageType:String = "EXTERNAL_DATA"; 
+	#end
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
 	public var opponentStrums:Bool = true;
