@@ -46,6 +46,11 @@
       "ref": "main",
       "url": "https://github.com/SPLCoding/hxCodec-but-it-works-xd.git"
     },
+     {
+      "name": "SScript",
+      "type": "haxelib",
+      "version": "8.1.6"
+    },
     {
       "name": "hxcpp-debug-server",
       "type": "haxelib",
