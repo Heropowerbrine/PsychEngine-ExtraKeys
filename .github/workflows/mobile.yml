@@ -31,6 +31,7 @@ jobs:
         run: |
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
+          haxelib install SScript 7.7.0
 
       - name: Configure Android
         run: |
