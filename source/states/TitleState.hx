@@ -21,6 +21,10 @@ import states.StoryMenuState;
 import states.OutdatedState;
 import states.MainMenuState;
 
+#if mobile
+import mobile.states.CopyState;
+#end
+
 typedef TitleData =
 {
 	titlex:Float,
