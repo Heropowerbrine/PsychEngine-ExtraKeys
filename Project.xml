@@ -154,8 +154,7 @@
 	<haxedef name='no-deprecation-warnings' />
 
 	<section if="android">
-		<!-- Do whatever you want I'm tired uninstall and install everytime -->
-		<certificate path="key.keystore" password="psychengine" alias="psychport" alias-password="psychengine" unless="debug" />
+	        <certificate path="key.keystore" password="nullfunni" alias="null" alias-password="nullfunni" unless="debug" />
 
 		<!--Target SDK-->
 		<android target-sdk-version="31" />
