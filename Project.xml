@@ -168,8 +168,6 @@
 		<config:android permission="android.permission.ACCESS_NETWORK_STATE" />
         </section>
 
-	<haxeflag name="--macro" value="mobile.macros.GlobalMacro.haxelibWarning()" />
-
 	<!--Avoid memory leaks with for loops in HScript-->
 	<haxedef name="loop_unroll_max_cost" value="25" />
 	<haxedef name="DISABLED_MACRO_SUPERLATIVE" if="mobile" />
