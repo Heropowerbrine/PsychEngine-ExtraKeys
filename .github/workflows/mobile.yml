@@ -31,7 +31,6 @@ jobs:
         run: |
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
-          haxelib install SScript 7.7.0
 
       - name: Configure Android
         run: |
@@ -39,7 +38,6 @@ jobs:
           haxelib run lime config ANDROID_NDK_ROOT $ANDROID_NDK_HOME
           haxelib run lime config JAVA_HOME $JAVA_HOME
           haxelib run lime config ANDROID_SETUP true
-          haxelib set SScript 7.7.0
 
       - name: Compile
         run: haxelib run lime build android -D ${{ matrix.storage-type }} -final
