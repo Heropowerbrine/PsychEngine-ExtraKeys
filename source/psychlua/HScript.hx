@@ -96,6 +96,7 @@ class HScript extends SScript
 		set('Countdown', backend.BaseStage.Countdown);
 		set('PlayState', PlayState);
 		set('Paths', Paths);
+		set('SUtil', SUtil);
 		set('Conductor', Conductor);
 		set('ClientPrefs', ClientPrefs);
 		#if ACHIEVEMENTS_ALLOWED
