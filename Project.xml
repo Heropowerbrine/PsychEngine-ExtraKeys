@@ -153,6 +153,27 @@
 	<!--Disable deprecated warnings-->
 	<haxedef name='no-deprecation-warnings' />
 
+	<section if="android">
+		<!-- Do whatever you want I'm tired uninstall and install everytime -->
+		<certificate path="key.keystore" password="psychengine" alias="psychport" alias-password="psychengine" unless="debug" />
+
+		<!--Target SDK-->
+		<android target-sdk-version="31" />
+
+		<config:android permission="android.permission.MANAGE_EXTERNAL_STORAGE" />
+		<config:android permission="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+		<!-- Fix Networking -->
+		<config:android permission="android.permission.INTERNET" />
+		<config:android permission="android.permission.ACCESS_NETWORK_STATE" />
+        </section>
+
+	<haxeflag name="--macro" value="mobile.macros.GlobalMacro.haxelibWarning()" />
+
+	<!--Avoid memory leaks with for loops in HScript-->
+	<haxedef name="loop_unroll_max_cost" value="25" />
+	<haxedef name="DISABLED_MACRO_SUPERLATIVE" if="mobile" />
+
 	<!--Macro fixes-->
 	<haxeflag name="--macro" value="allowPackage('flash')" />
 	<haxeflag name="--macro" value="include('my.pack')" />
