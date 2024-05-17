@@ -464,6 +464,32 @@ class Controls
 	public var gameplayRequest(get, default):Dynamic; // for PlayState and EditorPlayState (hitbox and virtualPad)
 	public var mobileC(get, never):Bool;
 
+	@:noCompletion
+	private function get_requested():Dynamic
+	{
+		if (isInSubstate)
+			return MusicBeatSubstate.instance;
+		else
+			return MusicBeatState.instance;
+	}
+
+        @:noCompletion
+	private function get_gameplayRequest():Dynamic
+	{
+		if (isInSubstate)
+			return MusicBeatSubstate.instance.mobileControls.current.target;
+		else
+			return MusicBeatState.instance.mobileControls.current.target;
+	}
+
+	@:noCompletion
+	private function get_mobileC():Bool
+	{
+		if (ClientPrefs.data.controlsAlpha >= 0.1)
+			return true;
+		else
+			return false;
+	}
 
 	// IGNORE THESE
 	public static var instance:Controls;
