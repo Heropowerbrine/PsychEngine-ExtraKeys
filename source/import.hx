@@ -14,9 +14,9 @@ import llua.Lua;
 import backend.Achievements;
 #end
 
-//Mobile Controls (add them later)
+//Mobile Controls 
 import mobile.objects.MobileControls;
-// import mobile.flixel.FlxHitbox;
+import mobile.flixel.FlxHitbox;
 import mobile.flixel.FlxVirtualPad;
 import mobile.flixel.input.FlxMobileInputID;
 import mobile.backend.MobileData;
