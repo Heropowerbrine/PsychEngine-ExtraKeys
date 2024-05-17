@@ -25,7 +25,7 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		option = new Option('Allow Phone Screensaver',
 		'If checked, the phone will sleep after going inactive for few seconds.\n(The time depends on your phone\'s options)',
 		'screensaver',
-		BOOL);
+		'bool');
 		option.onChange = () -> lime.system.System.allowScreenTimeout = curOption.getValue();
 		addOption(option);
 		#end
@@ -35,28 +35,28 @@ class MobileOptionsSubState extends BaseOptionsMenu
 			option = new Option('Hitbox Design',
 			'Choose how your hitbox should look like.',
 			'hitboxType',
-			STRING,
+			'string',
 			hintOptions);
 			addOption(option);
 
 			option = new Option('Hitbox Position',
 			'If checked, the hitbox will be put at the bottom of the screen, otherwise will stay at the top.',
 			'hitbox2',
-			BOOL);
+			'bool');
 			addOption(option);
 		}
 
 		option = new Option('Dynamic Controls Color',
 		'If checked, the mobile controls color will be set to the notes color in your settings.\n(have effect during gameplay only)',
 		'dynamicColors',
-		BOOL);
+		'bool');
 		addOption(option);
 
 		#if android
 		option = new Option('Storage Type',
 			'Which folder Psych Engine should use?\n(CHANGING THIS MAKES DELETE YOUR OLD FOLDER!!)',
 			'storageType',
-			STRING,
+			'string',
 			storageTypes);
 			addOption(option);
 		#end
