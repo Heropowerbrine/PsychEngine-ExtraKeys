@@ -459,6 +459,12 @@ class Controls
 		return false;
 	}
 
+	public var isInSubstate:Bool = false; // don't worry about this it becomes true and false on it's own in MusicBeatSubstate
+	public var requested(get, default):Dynamic; // is set to MusicBeatState or MusicBeatSubstate when the constructor is called
+	public var gameplayRequest(get, default):Dynamic; // for PlayState and EditorPlayState (hitbox and virtualPad)
+	public var mobileC(get, never):Bool;
+
+
 	// IGNORE THESE
 	public static var instance:Controls;
 	public function new()
