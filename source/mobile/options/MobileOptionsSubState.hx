@@ -19,38 +19,7 @@ class MobileOptionsSubState extends BaseOptionsMenu
 	{
 		#if android if (externalPaths != null && externalPaths.length > 0 || externalPaths[0] != '') storageTypes = storageTypes.concat(externalPaths); #end
 		title = 'Mobile Options';
-		rpcTitle = 'Mobile Options Menu'; // for Discord Rich Presence, fuck it
-
-		option = new Option('Extra Controls',
-		'Select how many extra buttons you prefere to have\nThey can be used for mechanics with LUA or HScript.',
-		'extraButtons',
-		STRING,
-		exControlTypes);
-		addOption(option);
-
-		option = new Option('Mobile Controls Opacity',
-		'Selects the opacity for the mobile buttons (carefull not to put it at 0 and loose track of your buttons).',
-		'controlsAlpha',
-		PERCENT);
-		option.scrollSpeed = 1;
-		option.minValue = 0.001;
-		option.maxValue = 1;
-		option.changeValue = 0.1;
-		option.decimals = 1;
-		option.onChange = () ->
-		{
-			virtualPad.alpha = curOption.getValue();
-			if (Controls.instance.mobileC) {
-				FlxG.sound.volumeUpKeys = [];
-				FlxG.sound.volumeDownKeys = [];
-				FlxG.sound.muteKeys = [];
-			} else {
-				FlxG.sound.volumeUpKeys = [FlxKey.PLUS, FlxKey.NUMPADPLUS];
-				FlxG.sound.volumeDownKeys = [FlxKey.MINUS, FlxKey.NUMPADMINUS];
-				FlxG.sound.muteKeys = [FlxKey.ZERO, FlxKey.NUMPADZERO];
-			}
-		};
-		addOption(option);
+		rpcTitle = 'Mobile Options Menu'; 
 
 		#if mobile
 		option = new Option('Allow Phone Screensaver',
