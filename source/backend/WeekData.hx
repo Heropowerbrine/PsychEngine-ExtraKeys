@@ -1,6 +1,5 @@
 package backend;
 
-import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
 import haxe.Json;
 
@@ -167,7 +166,7 @@ class WeekData {
 		}
 		#else
 		if(OpenFlAssets.exists(path)) {
-			rawJson = Assets.getText(path);
+			rawJson = OpenFlAssets.getText(path);
 		}
 		#end
 
