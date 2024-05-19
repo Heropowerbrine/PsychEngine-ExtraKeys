@@ -1,7 +1,7 @@
 package backend;
 
+import flixel.util.FlxSave;
 import openfl.utils.Assets;
-import lime.utils.Assets as LimeAssets;
 
 class CoolUtil
 {
@@ -19,8 +19,6 @@ class CoolUtil
 	{
 		var daList:String = null;
 		#if (sys && MODS_ALLOWED)
-		var formatted:Array<String> = path.split(':'); //prevent "shared:", "preload:" and other library names on file path
-		path = formatted[formatted.length-1];
 		if(FileSystem.exists(path)) daList = File.getContent(path);
 		#else
 		if(Assets.exists(path)) daList = Assets.getText(path);
@@ -109,7 +107,7 @@ class CoolUtil
 
 	inline public static function openFolder(folder:String, absolute:Bool = false) {
 		#if sys
-			if(!absolute) folder =  Sys.getCwd() + '$folder';
+			if(!absolute) folder = Sys.getCwd() + '$folder';
 
 			folder = folder.replace('/', '\\');
 			if(folder.endsWith('/')) folder.substr(0, folder.length - 1);
@@ -122,7 +120,7 @@ class CoolUtil
 			Sys.command(command, [folder]);
 			trace('$command $folder');
 		#else
-			FlxG.error("Platform is not supported for CoolUtil.openFolder");
+			FlxG.log.error("Platform is not supported for CoolUtil.openFolder");
 		#end
 	}
 
@@ -156,5 +154,9 @@ class CoolUtil
 			default:
 				text.borderStyle = NONE;
 		}
+	}
+
+	public static inline function last<T>(array:Array<T>):T {
+		return array[array.length - 1];
 	}
 }
