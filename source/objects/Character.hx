@@ -70,8 +70,6 @@ class Character extends FlxSprite
 	public var cameraPosition:Array<Float> = [0, 0];
 	public var healthColorArray:Array<Int> = [255, 0, 0];
 
-	public var missingCharacter:Bool = false;
-	public var missingText:FlxText;
 	public var hasMissAnimations:Bool = false;
 	public var vocalsFile:String = '';
 
@@ -89,9 +87,45 @@ class Character extends FlxSprite
 		animation = new PsychAnimationController(this);
 
 		animOffsets = new Map<String, Array<Dynamic>>();
+		curCharacter = character;
 		this.isPlayer = isPlayer;
-		changeCharacter(character);
-		
+		switch (curCharacter)
+		{
+			//case 'your character name in case you want to hardcode them instead':
+
+			default:
+				var characterPath:String = 'characters/$curCharacter.json';
+
+				var path:String = Paths.getPath(characterPath, TEXT, null, true);
+				#if MODS_ALLOWED
+				if (!FileSystem.exists(path))
+				#else
+				if (!Assets.exists(path))
+				#end
+				{
+					path = Paths.getSharedPath('characters/' + DEFAULT_CHARACTER + '.json'); //If a character couldn't be found, change him to BF just to prevent a crash
+					color = FlxColor.BLACK;
+					alpha = 0.6;
+				}
+
+				try
+				{
+					#if MODS_ALLOWED
+					loadCharacterFile(Json.parse(File.getContent(path)));
+					#else
+					loadCharacterFile(Json.parse(Assets.getText(path)));
+					#end
+				}
+				catch(e:Dynamic)
+				{
+					trace('Error loading character file of "$character": $e');
+				}
+		}
+
+		if(animOffsets.exists('singLEFTmiss') || animOffsets.exists('singDOWNmiss') || animOffsets.exists('singUPmiss') || animOffsets.exists('singRIGHTmiss')) hasMissAnimations = true;
+		recalculateDanceIdle();
+		dance();
+
 		switch(curCharacter)
 		{
 			case 'pico-speaker':
@@ -101,51 +135,12 @@ class Character extends FlxSprite
 		}
 	}
 
-	public function changeCharacter(character:String)
-	{
-		animationsArray = [];
-		animOffsets = [];
-		curCharacter = character;
-		var characterPath:String = 'characters/$character.json';
-
-		var path:String = Paths.getPath(characterPath, TEXT);
-		#if MODS_ALLOWED
-		if (!FileSystem.exists(path))
-		#else
-		if (!Assets.exists(path))
-		#end
-		{
-			path = Paths.getSharedPath('characters/' + DEFAULT_CHARACTER + '.json'); //If a character couldn't be found, change him to BF just to prevent a crash
-			missingCharacter = true;
-			missingText = new FlxText(0, 0, 300, 'ERROR:\n$character.json', 16);
-			missingText.alignment = CENTER;
-		}
-
-		try
-		{
-			#if MODS_ALLOWED
-			loadCharacterFile(Json.parse(File.getContent(path)));
-			#else
-			loadCharacterFile(Json.parse(Assets.getText(path)));
-			#end
-		}
-		catch(e:Dynamic)
-		{
-			trace('Error loading character file of "$character": $e');
-		}
-
-		skipDance = false;
-		hasMissAnimations = animOffsets.exists('singLEFTmiss') || animOffsets.exists('singDOWNmiss') || animOffsets.exists('singUPmiss') || animOffsets.exists('singRIGHTmiss');
-		recalculateDanceIdle();
-		dance();
-	}
-
 	public function loadCharacterFile(json:Dynamic)
 	{
 		isAnimateAtlas = false;
 
 		#if flxanimate
-		var animToFind:String = Paths.getPath('images/' + json.image + '/Animation.json', TEXT);
+		var animToFind:String = Paths.getPath('images/' + json.image + '/Animation.json', TEXT, null, true);
 		if (#if MODS_ALLOWED FileSystem.exists(animToFind) || #end Assets.exists(animToFind))
 			isAnimateAtlas = true;
 		#end
@@ -234,9 +229,9 @@ class Character extends FlxSprite
 
 	override function update(elapsed:Float)
 	{
-		#if flxanimate if(isAnimateAtlas) atlas.update(elapsed); #end
+		if(isAnimateAtlas) atlas.update(elapsed);
 
-		if(debugMode || (!isAnimateAtlas && animation.curAnim == null) #if flxanimate || (isAnimateAtlas && atlas.anim.curSymbol == null) #end)
+		if(debugMode || (!isAnimateAtlas && animation.curAnim == null) || (isAnimateAtlas && atlas.anim.curSymbol == null))
 		{
 			super.update(elapsed);
 			return;
@@ -300,20 +295,20 @@ class Character extends FlxSprite
 	}
 
 	inline public function isAnimationNull():Bool
-		return #if flxanimate !isAnimateAtlas ? #end (animation.curAnim == null) #if flxanimate : (atlas.anim.curSymbol == null) #end;
+		return !isAnimateAtlas ? (animation.curAnim == null) : (atlas.anim.curSymbol == null);
 
 	inline public function getAnimationName():String
 	{
 		var name:String = '';
 		@:privateAccess
-		if(!isAnimationNull()) name = #if flxanimate !isAnimateAtlas ? #end animation.curAnim.name #if flxanimate : atlas.anim.lastPlayedAnim #end;
+		if(!isAnimationNull()) name = !isAnimateAtlas ? animation.curAnim.name : atlas.anim.lastPlayedAnim;
 		return (name != null) ? name : '';
 	}
 
 	public function isAnimationFinished():Bool
 	{
 		if(isAnimationNull()) return false;
-		return #if flxanimate !isAnimateAtlas ? #end animation.curAnim.finished #if flxanimate : atlas.anim.finished #end;
+		return !isAnimateAtlas ? animation.curAnim.finished : atlas.anim.finished;
 	}
 
 	public function finishAnimation():Void
@@ -321,26 +316,24 @@ class Character extends FlxSprite
 		if(isAnimationNull()) return;
 
 		if(!isAnimateAtlas) animation.curAnim.finish();
-		#if flxanimate else atlas.anim.curFrame = atlas.anim.length - 1; #end
+		else atlas.anim.curFrame = atlas.anim.length - 1;
 	}
 
 	public var animPaused(get, set):Bool;
 	private function get_animPaused():Bool
 	{
 		if(isAnimationNull()) return false;
-		return #if flxanimate !isAnimateAtlas ? #end animation.curAnim.paused #if flxanimate : atlas.anim.isPlaying #end;
+		return !isAnimateAtlas ? animation.curAnim.paused : atlas.anim.isPlaying;
 	}
 	private function set_animPaused(value:Bool):Bool
 	{
 		if(isAnimationNull()) return value;
 		if(!isAnimateAtlas) animation.curAnim.paused = value;
-		#if flxanimate
 		else
 		{
 			if(value) atlas.anim.pause();
 			else atlas.anim.resume();
 		} 
-		#end
 
 		return value;
 	}
@@ -373,7 +366,7 @@ class Character extends FlxSprite
 	{
 		specialAnim = false;
 		if(!isAnimateAtlas) animation.play(AnimName, Force, Reversed, Frame);
-		#if flxanimate else atlas.anim.play(AnimName, Force, Reversed, Frame); #end
+		else atlas.anim.play(AnimName, Force, Reversed, Frame);
 
 		if (animOffsets.exists(AnimName))
 		{
@@ -456,38 +449,13 @@ class Character extends FlxSprite
 	public var atlas:FlxAnimate;
 	public override function draw()
 	{
-		var lastAlpha:Float = alpha;
-		var lastColor:FlxColor = color;
-		if(missingCharacter)
-		{
-			alpha *= 0.6;
-			color = FlxColor.BLACK;
-		}
-
 		if(isAnimateAtlas)
 		{
 			copyAtlasValues();
 			atlas.draw();
-			if(missingCharacter)
-			{
-				alpha = lastAlpha;
-				color = lastColor;
-
-				missingText.x = getMidpoint().x - 150;
-				missingText.y = getMidpoint().y - 10;
-				missingText.draw();
-			}
 			return;
 		}
 		super.draw();
-		if(missingCharacter)
-		{
-			alpha = lastAlpha;
-			color = lastColor;
-			missingText.x = getMidpoint().x - 150;
-			missingText.y = getMidpoint().y - 10;
-			missingText.draw();
-		}
 	}
 
 	public function copyAtlasValues()
@@ -525,4 +493,4 @@ class Character extends FlxSprite
 			atlas = FlxDestroyUtil.destroy(atlas);
 	}
 	#end
-}
+	}
