@@ -110,7 +110,7 @@ class Paths
 		}
 		#end
 
-		if(parentfolder == "mobile")
+		if(library == "mobile")
 			return getSharedPath('mobile/$file');
 
 		if (library != null)
