@@ -12,31 +12,30 @@ import flixel.math.FlxPoint;
  * @original author Ka Wing Chin & Mihai Alexandru
  * @modification's author: Karim Akra & Lily (mcagabe19)
  */
-class FlxVirtualPad extends FlxMobileInputManager
-{
-	public var buttonLeft:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.LEFT, FlxMobileInputID.noteLEFT]);
-	public var buttonUp:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.UP, FlxMobileInputID.noteUP]);
-	public var buttonRight:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.RIGHT, FlxMobileInputID.noteRIGHT]);
-	public var buttonDown:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.DOWN, FlxMobileInputID.noteDOWN]);
-	public var buttonLeft2:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.LEFT2, FlxMobileInputID.noteLEFT]);
-	public var buttonUp2:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.UP2, FlxMobileInputID.noteUP]);
-	public var buttonRight2:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.RIGHT2, FlxMobileInputID.noteRIGHT]);
-	public var buttonDown2:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.DOWN2, FlxMobileInputID.noteDOWN]);
-	public var buttonA:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.A]);
-	public var buttonB:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.B]);
-	public var buttonC:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.C]);
-	public var buttonD:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.D]);
-	public var buttonE:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.E]);
-	public var buttonF:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.F]);
-	public var buttonG:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.G]);
-	public var buttonS:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.S]);
-	public var buttonV:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.V]);
-	public var buttonX:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.X]);
-	public var buttonY:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.Y]);
-	public var buttonZ:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.Z]);
-	public var buttonP:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.P]);
-	public var buttonExtra:FlxButton = new FlxButton(0, 0);
-	public var buttonExtra2:FlxButton = new FlxButton(0, 0);
+class FlxVirtualPad extends FlxMobileInputManager<TouchPadButton> {
+	public var buttonLeft:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.LEFT, FlxMobileInputID.noteLEFT]);
+	public var buttonUp:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.UP, FlxMobileInputID.noteUP]);
+	public var buttonRight:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.RIGHT, FlxMobileInputID.noteRIGHT]);
+	public var buttonDown:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.DOWN, FlxMobileInputID.noteDOWN]);
+	public var buttonLeft2:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.LEFT2, FlxMobileInputID.noteLEFT]);
+	public var buttonUp2:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.UP2, FlxMobileInputID.noteUP]);
+	public var buttonRight2:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.RIGHT2, FlxMobileInputID.noteRIGHT]);
+	public var buttonDown2:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.DOWN2, FlxMobileInputID.noteDOWN]);
+	public var buttonA:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.A]);
+	public var buttonB:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.B]);
+	public var buttonC:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.C]);
+	public var buttonD:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.D]);
+	public var buttonE:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.E]);
+	public var buttonF:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.F]);
+	public var buttonG:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.G]);
+	public var buttonS:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.S]);
+	public var buttonV:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.V]);
+	public var buttonX:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.X]);
+	public var buttonY:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.Y]);
+	public var buttonZ:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.Z]);
+	public var buttonP:TouchPadButton = new TouchPadButton(0, 0, [FlxMobileInputID.P]);
+	public var buttonExtra:TouchPadButton = new TouchPadButton(0, 0);
+	public var buttonExtra2:TouchPadButton = new TouchPadButton(0, 0);
 
 	var storedButtonsIDs:Map<String, Array<FlxMobileInputID>> = new Map<String, Array<FlxMobileInputID>>();
 
