@@ -5,7 +5,7 @@ import flixel.system.macros.FlxMacroUtil;
 /**
  * A high-level list of unique values for mobile input buttons.
  * Maps enum values and strings to unique integer codes
- * @author Karim Akra
+ * @author Karim Akra & Lily(mcagabe19)
  */
 @:runtimeValue
 enum abstract FlxMobileInputID(Int) from Int to Int {
@@ -41,25 +41,35 @@ enum abstract FlxMobileInputID(Int) from Int to Int {
 	var X = 24;
 	var Y = 25;
 	var Z = 26;
+	var ZERO = 27;
+	var ONE = 28;
+	var TWO = 29;
+	var THREE = 30;
+	var FOUR = 31;
+	var FIVE = 32;
+	var SIX = 33;
+	var SEVEN = 34;
+	var EIGHT = 35;
+	var NINE = 36;
 	// VPAD Buttons
-	var UP = 27;
-	var UP2 = 28;
-	var DOWN = 29;
-	var DOWN2 = 30;
-	var LEFT = 31;
-	var LEFT2 = 32;
-	var RIGHT = 33;
-	var RIGHT2 = 34;
+	var UP = 37;
+	var UP2 = 38;
+	var DOWN = 39;
+	var DOWN2 = 40;
+	var LEFT = 41;
+	var LEFT2 = 42;
+	var RIGHT = 43;
+	var RIGHT2 = 44;
 	// HITBOX
-	var hitboxUP = 35;
-	var hitboxDOWN = 36;
-	var hitboxLEFT = 37;
-	var hitboxRIGHT = 38;
+	var hitboxUP = 45;
+	var hitboxDOWN = 46;
+	var hitboxLEFT = 47;
+	var hitboxRIGHT = 48;
 	// PlayState Releated
-	var noteUP = 39;
-	var noteDOWN = 40;
-	var noteLEFT = 41;
-	var noteRIGHT = 42;
+	var noteUP = 49;
+	var noteDOWN = 50;
+	var noteLEFT = 51;
+	var noteRIGHT = 52;
 
 	@:from
 	public static inline function fromString(s:String) {
