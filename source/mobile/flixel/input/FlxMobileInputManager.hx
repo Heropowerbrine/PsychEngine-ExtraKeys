@@ -2,18 +2,18 @@ package mobile.flixel.input;
 
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import mobile.flixel.input.FlxMobileInputID;
-import mobile.objects.TouchButton;
+import mobile.flixel.FlxButton;
 import haxe.ds.Map;
 
 /**
  * A FlxButton group with functions for input handling 
  */
-class FlxMobileInputManager<T:TouchButton> extends FlxTypedSpriteGroup<T>
+class FlxMobileInputManager extends FlxTypedSpriteGroup<FlxButton>
 {
 	/**
 	 * A map to keep track of all the buttons using it's ID
 	 */
-	public var trackedButtons:Map<FlxMobileInputID, T> = new Map<FlxMobileInputID, T>();
+	public var trackedButtons:Map<FlxMobileInputID, FlxButton> = new Map<FlxMobileInputID, FlxButton>();
 
 	public function new()
 	{
@@ -145,7 +145,7 @@ class FlxMobileInputManager<T:TouchButton> extends FlxTypedSpriteGroup<T>
 	public function updateTrackedButtons()
 	{
 		trackedButtons.clear();
-		forEachExists(function(button:T)
+		forEachExists(function(button:FlxButton)
 		{
 			if (button.IDs != null)
 			{
