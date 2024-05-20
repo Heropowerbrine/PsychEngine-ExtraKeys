@@ -5,12 +5,8 @@ import flixel.math.FlxPoint;
 import mobile.flixel.input.FlxMobileInputManager;
 import haxe.extern.EitherType;
 import mobile.flixel.FlxButton;
-import flixel.util.FlxSave;
-import mobile.flixel.FlxHitbox.HitboxButton;
-import mobile.flixel.FlxVirtualPad.TouchPadButton;
-import flixel.util.typeLimit.OneOfTwo;
 
-class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager<Dynamic>>
+class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager>
 {
 	public var virtualPad:FlxVirtualPad = new FlxVirtualPad('NONE', 'NONE', NONE);
 	public var hitbox:FlxHitbox = new FlxHitbox(NONE);
@@ -19,7 +15,6 @@ class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager<Dynamic>>
 
 	public static var mode(get, set):Int;
 	public static var forcedControl:Null<Int>;
-	public static var save:FlxSave;
 
 	public function new(?forceType:Int, ?extra:Bool = true)
 	{
@@ -43,7 +38,6 @@ class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager<Dynamic>>
 		}
 		current = new CurrentManager(this);
 		// Options related stuff
-		current.target.alpha = 1;
 		alpha = ClientPrefs.data.controlsAlpha;
 		updateButtonsColors();
 	}
@@ -75,38 +69,38 @@ class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager<Dynamic>>
 
 	public static function setCustomMode(virtualPad:FlxVirtualPad):Void
 	{
-		if (save.data.buttons == null)
+		if (FlxG.save.data.buttons == null)
 		{
-			save.data.buttons = new Array();
+			FlxG.save.data.buttons = new Array();
 			for (buttons in virtualPad)
-				save.data.buttons.push(FlxPoint.get(buttons.x, buttons.y));
+				FlxG.save.data.buttons.push(FlxPoint.get(buttons.x, buttons.y));
 		}
 		else
 		{
 			var tempCount:Int = 0;
 			for (buttons in virtualPad)
 			{
-				save.data.buttons[tempCount] = FlxPoint.get(buttons.x, buttons.y);
+				FlxG.save.data.buttons[tempCount] = FlxPoint.get(buttons.x, buttons.y);
 				tempCount++;
 			}
 		}
 
-		save.flush();
+		FlxG.save.flush();
 	}
 
 	public static function getCustomMode(virtualPad:FlxVirtualPad):FlxVirtualPad
 	{
 		var tempCount:Int = 0;
 
-		if (save.data.buttons == null)
+		if (FlxG.save.data.buttons == null)
 			return virtualPad;
 
 		for (buttons in virtualPad)
 		{
-			if (save.data.buttons[tempCount] != null)
+			if (FlxG.save.data.buttons[tempCount] != null)
 			{
-				buttons.x = save.data.buttons[tempCount].x;
-				buttons.y = save.data.buttons[tempCount].y;
+				buttons.x = FlxG.save.data.buttons[tempCount].x;
+				buttons.y = FlxG.save.data.buttons[tempCount].y;
 			}
 			tempCount++;
 		}
@@ -133,8 +127,8 @@ class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager<Dynamic>>
 
 	static function set_mode(mode:Int = 0)
 	{
-		save.data.mobileControlsMode = mode;
-		save.flush();
+		FlxG.save.data.mobileControlsMode = mode;
+		FlxG.save.flush();
 		return mode;
 	}
 
@@ -143,13 +137,13 @@ class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager<Dynamic>>
 		if (forcedControl != null)
 			return forcedControl;
 
-		if (save.data.mobileControlsMode == null)
+		if (FlxG.save.data.mobileControlsMode == null)
 		{
-			save.data.mobileControlsMode = 0;
-			save.flush();
+			FlxG.save.data.mobileControlsMode = 0;
+			FlxG.save.flush();
 		}
 
-		return save.data.mobileControlsMode;
+		return FlxG.save.data.mobileControlsMode;
 	}
 
 	public function updateButtonsColors()
@@ -177,23 +171,30 @@ class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager<Dynamic>>
 		current.buttonDown.color = buttonsColors[1];
 		current.buttonUp.color = buttonsColors[2];
 		current.buttonRight.color = buttonsColors[3];
-	}
 
-	public static function initSave() {
-		save = new FlxSave();
-		save.bind('MobileControls', CoolUtil.getSavePath());
+		/*if(mode == 4){
+				hitbox.buttonLeft.color = buttonsColors[0];
+				hitbox.buttonDown.color = buttonsColors[1];
+				hitbox.buttonUp.color = buttonsColors[2];
+				hitbox.buttonRight.color = buttonsColors[3];
+			} else {
+				virtualPad.buttonLeft.color = buttonsColors[0];
+				virtualPad.buttonDown.color = buttonsColors[1];
+				virtualPad.buttonUp.color = buttonsColors[2];
+				virtualPad.buttonRight.color = buttonsColors[3];
+		}*/
 	}
 }
 
 class CurrentManager
 {
-	public var buttonLeft:TouchButton;
-	public var buttonDown:TouchButton;
-	public var buttonUp:TouchButton;
-	public var buttonRight:TouchButton;
-	public var buttonExtra:TouchButton;
-	public var buttonExtra2:TouchButton;
-	public var target:FlxMobileInputManager<Dynamic>;
+	public var buttonLeft:FlxButton;
+	public var buttonDown:FlxButton;
+	public var buttonUp:FlxButton;
+	public var buttonRight:FlxButton;
+	public var buttonExtra:FlxButton;
+	public var buttonExtra2:FlxButton;
+	public var target:FlxMobileInputManager;
 
 	public function new(control:MobileControls)
 	{
