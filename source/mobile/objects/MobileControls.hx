@@ -4,6 +4,7 @@ import haxe.ds.Map;
 import flixel.math.FlxPoint;
 import mobile.flixel.input.FlxMobileInputManager;
 import haxe.extern.EitherType;
+import flixel.util.FlxSave;
 import mobile.flixel.FlxButton;
 
 class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager>
@@ -15,6 +16,7 @@ class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager>
 
 	public static var mode(get, set):Int;
 	public static var forcedControl:Null<Int>;
+	public static var save:FlxSave;
 
 	public function new(?forceType:Int, ?extra:Bool = true)
 	{
