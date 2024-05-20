@@ -172,6 +172,10 @@ class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager>
 		current.buttonUp.color = buttonsColors[2];
 		current.buttonRight.color = buttonsColors[3];
 
+		public static function initSave() {
+		save = new FlxSave();
+		save.bind('MobileControls', CoolUtil.getSavePath());
+
 		/*if(mode == 4){
 				hitbox.buttonLeft.color = buttonsColors[0];
 				hitbox.buttonDown.color = buttonsColors[1];
