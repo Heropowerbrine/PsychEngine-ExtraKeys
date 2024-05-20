@@ -16,6 +16,7 @@ import states.TitleState;
 	#if mobile public var screensaver:Bool = false; #end
 	#if android public var storageType:String = "EXTERNAL"; #end
         public var hitboxType:String = "Gradient";
+	public var hideHitboxHints:Bool = false;
         // end of Mobile and Mobile Controls Releated
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
