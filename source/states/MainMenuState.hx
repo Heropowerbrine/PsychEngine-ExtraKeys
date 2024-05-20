@@ -113,6 +113,8 @@ class MainMenuState extends MusicBeatState
 		#end
 		#end
 
+		addVirtualPad('LEFT_FULL', 'MAIN_MENU');
+
 		super.create();
 
 		FlxG.camera.follow(camFollow, null, 9);
@@ -205,7 +207,7 @@ class MainMenuState extends MusicBeatState
 					}
 				}
 			}
-			if (controls.justPressed('debug_1'))
+			if (controls.justPressed('debug_1') || virtualPad.buttonE.justPressed)
 			{
 				selectedSomethin = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
