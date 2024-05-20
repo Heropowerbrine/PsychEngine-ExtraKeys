@@ -3,10 +3,12 @@ package mobile.flixel;
 import flixel.FlxG;
 import sys.FileSystem;
 import flixel.math.FlxPoint;
+import funkin.options.Options;
 import mobile.flixel.FlxButton;
 import openfl.display.BitmapData;
 import flixel.util.FlxDestroyUtil;
 import flixel.graphics.FlxGraphic;
+import funkin.backend.assets.Paths;
 import mobile.objects.FlxButtonGroup;
 import flixel.graphics.frames.FlxTileFrames;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -198,10 +200,10 @@ class FlxVirtualPad extends FlxButtonGroup
 		}
 
 		scrollFactor.set();
-		var guh = ClientPrefs.controlsAlpha;
+		var guh = Options.controlsAlpha;
 		if (guh >= 0.9)
 			guh = guh - 0.07;
-		alpha = ClientPrefs.controlsAlpha;
+		alpha = Options.controlsAlpha;
 	}
 
 	public static function getDPadModeByString(mode:String):FlxDPadMode {
