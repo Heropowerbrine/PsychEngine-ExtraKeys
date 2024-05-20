@@ -4,7 +4,6 @@ import flixel.FlxSubState;
 
 import flixel.effects.FlxFlicker;
 import lime.app.Application;
-import flixel.addons.transition.FlxTransitionableState;
 
 class FlashingState extends MusicBeatState
 {
@@ -18,16 +17,19 @@ class FlashingState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
-		warnText = new FlxText(0, 0, FlxG.width,
-			"Hey, watch out!\n
-			This Mod contains some flashing lights!\n
-			Press ENTER to disable them now or go to Options Menu.\n
-			Press ESCAPE to ignore this message.\n
-			You've been warned!",
-			32);
+		var guh:String = "Hey, watch out!\n
+		This Mod contains some flashing lights!\n
+		Press A/ENTER to disable them now or go to Options Menu.\n
+		Press B/ESCAPE to ignore this message.\n
+		You've been warned!";
+
+		controls.isInSubstate = false; // qhar I hate it
+		warnText = new FlxText(0, 0, FlxG.width, guh, 32);
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
+
+		addVirtualPad('NONE', 'A_B');
 	}
 
 	override function update(elapsed:Float)
