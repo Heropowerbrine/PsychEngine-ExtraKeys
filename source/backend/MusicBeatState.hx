@@ -70,10 +70,41 @@ class MusicBeatState extends FlxUIState
 		}
 	}
 
-	public function addHitbox(mania:Int)
+	public function addHitbox(DefaultDrawTarget:Bool = true,mania:Int)
 	{
 		hitbox = new FlxHitbox();
-		add hitbox;
+		var curhitbox:extraMode = NONE;
+
+		switch (mania){
+			case 0:
+				curhitbox = ONE;
+			case 1:
+				curhitbox = TWO;
+			case 2:
+				curhitbox = THREE;
+			case 3:
+				curhitbox = NONE;
+			case 4:
+				curhitbox = FIVE;
+			case 5:
+				curhitbox = SIX;
+			case 6:
+				curhitbox = SEVEN;
+			case 7:
+				curhitbox = EIGHT;
+			case 8:
+				curhitbox = NINE;
+			default:
+				curhitbox = NONE;
+		}
+		hitbox = new FlxHitbox(curhitbox);
+
+		camControls = new FlxCamera();
+		camControls.bgColor.alpha = 0;
+		FlxG.cameras.add(camControls, DefaultDrawTarget);
+		hitbox.cameras = [camControls];
+		hitbox.visible = false;
+		add(hitbox);
 	}
 
 	override function destroy()
