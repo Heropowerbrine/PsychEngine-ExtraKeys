@@ -84,7 +84,7 @@ class Song
 				}
 			}
 		}
-		if (songJson.mania == null && ClientPrefs.data.convertEK) //yall better not replace this
+		if (songJson.mania == null) //yall better not replace this
         {
 			/*var highestMania:Int = -1;
 			for (i in 0...songJson.notes.length)
