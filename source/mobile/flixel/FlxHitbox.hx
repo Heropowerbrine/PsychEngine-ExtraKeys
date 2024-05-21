@@ -20,6 +20,11 @@ class FlxHitbox extends FlxMobileInputManager
 	public var buttonDown:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.hitboxDOWN, FlxMobileInputID.noteDOWN]);
 	public var buttonUp:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.hitboxUP, FlxMobileInputID.noteUP]);
 	public var buttonRight:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.hitboxRIGHT, FlxMobileInputID.noteRIGHT]);
+	public var button5:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.note5]);
+	public var button6:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.note6]);
+	public var button7:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.note7]);
+	public var button8:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.note8]);
+	public var button9:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.note9]);
 	public var buttonExtra:FlxButton = new FlxButton(0, 0);
 	public var buttonExtra2:FlxButton = new FlxButton(0, 0);
 
