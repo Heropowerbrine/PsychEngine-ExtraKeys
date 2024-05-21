@@ -26,6 +26,7 @@ class MusicBeatState extends FlxUIState
 	public var mobileControls:MobileControls;
 	public var camControls:FlxCamera;
 	public var vpadCam:FlxCamera;
+	public var hitbox:FlxHitbox;
 
 	public function addVirtualPad(DPad:String, Action:String)
 	{
@@ -67,6 +68,12 @@ class MusicBeatState extends FlxUIState
 			FlxG.cameras.add(vpadCam, DefaultDrawTarget);
 			virtualPad.cameras = [vpadCam];
 		}
+	}
+
+	public function addHitbox(mania:Int)
+	{
+		hitbox = new FlxHitbox();
+		add hitbox;
 	}
 
 	override function destroy()
