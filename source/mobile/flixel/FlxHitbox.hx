@@ -10,6 +10,7 @@ import openfl.display.Shape;
  * It's really easy to customize the layout.
  *
  * @author: Mihai Alexandru, Karim Akra & Lily (mcagabe19)
+ * LOL IT'S NO LONGER JUST 4 HINTS, EXTRA KEYS IS HERE -Heropowerbrine
  */
 class FlxHitbox extends FlxMobileInputManager
 {
@@ -65,6 +66,55 @@ class FlxHitbox extends FlxMobileInputManager
 					0xFFF9393F));
 				add(buttonExtra2 = createHint(Std.int(FlxG.width / 2), offsetFir, Std.int(FlxG.width / 2), Std.int(FlxG.height / 4), 0xA6FF00));
 				add(buttonExtra = createHint(0, offsetFir, Std.int(FlxG.width / 2), Std.int(FlxG.height / 4), 0xFF0066FF));
+			case ONE:
+				add(buttonUp = createHint(0, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFC24B99));
+			case TWO:
+				add(buttonLeft = createHint(0, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFC24B99));
+				add(buttonRight = createHint(FlxG.width / 2, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FFFF));
+			case THREE:
+				add(buttonLeft = createHint(0, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFC24B99));
+				add(buttonUp = createHint(426, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FFFF));
+				add(buttonRight = createHint(852, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF12FA05));
+			case FIVE:
+				add(buttonLeft = createHint(0, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFC24B99));
+				add(buttonDown = createHint(FlxG.width / 5, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FFFF));
+				add(button5 = createHint(FlxG.width / 2.5, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFC24B99));
+				add(buttonUp = createHint(768, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF12FA05));
+				add(buttonRight = createHint(1024, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFF9393F));
+			case SIX:
+				add(buttonLeft = createHint(0, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFC24B99));
+				add(buttonDown = createHint(213, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FFFF));
+				add(button5 = createHint(426, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFC24B99));
+				add(button6 = createHint(639, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FFFF));
+				add(buttonUp = createHint(852, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF12FA05));
+				add(buttonRight = createHint(1065, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFF9393F));
+			case SEVEN:
+				add(buttonLeft = createHint(0, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFC24B99));
+				add(buttonDown = createHint(182, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FFFF));
+				add(button5 = createHint(364, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFC24B99));
+				add(button6 = createHint(546, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FFFF));
+				add(button7 = createHint(728, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF12FA05));
+				add(buttonUp = createHint(910, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF12FA05));
+				add(buttonRight = createHint(1092, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFF9393F));
+			case EIGHT:
+				add(buttonLeft = createHint(0, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFC24B99));
+				add(buttonDown = createHint(160, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FFFF));
+				add(button5 = createHint(320, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFC24B99));
+				add(button6 = createHint(480, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FFFF));
+				add(button7 = createHint(640, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF12FA05));
+				add(button8 = createHint(800, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFF9393F));
+				add(buttonUp = createHint(960, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF12FA05));
+				add(buttonRight = createHint(1120, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFF9393F));
+			case NINE:
+				add(buttonLeft = createHint(0, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFC24B99));
+				add(buttonDown = createHint(142, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FFFF));
+				add(button5 = createHint(284, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFC24B99));
+				add(button6 = createHint(426, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FFFF));
+				add(button7 = createHint(568, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF12FA05));
+				add(button8 = createHint(710, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFF9393F));
+				add(button9 = createHint(852, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF12FA05));
+				add(buttonUp = createHint(994, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF12FA05));
+				add(buttonRight = createHint(1136, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFFF9393F));
 		}
 
 		for (button in Reflect.fields(this))
