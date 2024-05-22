@@ -76,7 +76,6 @@ class MusicBeatSubstate extends FlxSubState
 
 	public function addHitbox(DefaultDrawTarget:Bool = true,mania:Int)
 	{
-		hitbox = new FlxHitbox();
 		var curhitbox:extraMode = NONE;
 
 		switch (mania){
