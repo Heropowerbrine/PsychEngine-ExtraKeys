@@ -181,6 +181,8 @@ class PlayState extends MusicBeatState
 	public var timeBar:Bar;
 	var songPercent:Float = 0;
 
+	public static var androidmania:Int = 0;
+
 	public var ratingsData:Array<Rating> = Rating.loadDefault();
 
 	private var generatedMusic:Bool = false;
@@ -377,6 +379,7 @@ class PlayState extends MusicBeatState
 		
 		Main.mania = SONG.mania;
 		setOnScripts('mania', Main.mania);
+		androidmania = SONG.mania;
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.bpm = SONG.bpm;
@@ -677,8 +680,8 @@ class PlayState extends MusicBeatState
 			}
 		#end
 
-		if Main.mania != 3
-			addHitbox(false,Main.mania);
+		if androidmania != 3
+			addHitbox(false,androidmania);
 			hitbox.visible = true;
 		else
 			addMobileControls(false);
