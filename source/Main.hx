@@ -137,8 +137,6 @@ class Main extends Sprite
 		#if (LUA_ALLOWED && !hxluajit) llua.Lua.set_callbacks_function(cpp.Callable.fromStaticFunction(psychlua.CallbackHandler.call)); #end
 		ClientPrefs.loadDefaultKeys();
 
-		MobileControls.initSave();
-
 		#if desktop FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, toggleFullScreen); #end
 
 		#if android FlxG.android.preventDefaultKeys = [BACK]; #end
