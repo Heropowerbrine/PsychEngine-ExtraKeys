@@ -398,6 +398,7 @@ class Controls
 		return result
 			|| _myGamepadJustPressed(gamepadBinds[key]) == true
 			|| mobileCJustPressed(mobileBinds[key]) == true
+			|| mobilehitboxJustPressed(mobileBinds[key]) == true
 			|| virtualPadJustPressed(mobileBinds[key]) == true;
 	}
 
@@ -409,6 +410,7 @@ class Controls
 		return result
 			|| _myGamepadPressed(gamepadBinds[key]) == true
 			|| mobileCPressed(mobileBinds[key]) == true
+			|| mobilehitboxPressed(mobileBinds[key]) == true
 			|| virtualPadPressed(mobileBinds[key]) == true;
 	}
 
@@ -420,6 +422,7 @@ class Controls
 		return result
 			|| _myGamepadJustReleased(gamepadBinds[key]) == true
 			|| mobileCJustReleased(mobileBinds[key]) == true
+			|| mobilehitboxJustReleased(mobileBinds[key]) == true
 			|| virtualPadJustReleased(mobileBinds[key]) == true;
 	}
 
@@ -543,6 +546,45 @@ class Controls
 	private function mobileCJustReleased(keys:Array<FlxMobileInputID>):Bool
 	{
 		if (keys != null && requested.mobileControls != null && gameplayRequest != null)
+		{
+			if (gameplayRequest.anyJustReleased(keys))
+			{
+				controllerMode = true;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private function mobilehitboxPressed(keys:Array<FlxMobileInputID>):Bool
+	{
+		if (keys != null && requested.hitbox != null && gameplayRequest != null)
+		{
+			if (gameplayRequest.anyPressed(keys))
+			{
+				controllerMode = true;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private function mobilehitboxJustPressed(keys:Array<FlxMobileInputID>):Bool
+	{
+		if (keys != null && requested.hitbox != null && gameplayRequest != null)
+		{
+			if (gameplayRequest.anyJustPressed(keys))
+			{
+				controllerMode = true;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private function mobilehitboxJustReleased(keys:Array<FlxMobileInputID>):Bool
+	{
+		if (keys != null && requested.hitbox != null && gameplayRequest != null)
 		{
 			if (gameplayRequest.anyJustReleased(keys))
 			{
