@@ -102,7 +102,7 @@ class MusicBeatSubstate extends FlxSubState
 		}
 		hitbox = new FlxHitbox(curhitbox);
 
-		camControls = new FlxCamera();
+		var camControls = new flixel.FlxCamera();
 		camControls.bgColor.alpha = 0;
 		FlxG.cameras.add(camControls, DefaultDrawTarget);
 		hitbox.cameras = [camControls];
