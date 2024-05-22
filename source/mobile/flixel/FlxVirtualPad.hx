@@ -105,6 +105,14 @@ class FlxVirtualPad extends FlxMobileInputManager {
 				add(buttonExtra2 = createButton(FlxG.width - 132, FlxG.height - 135, 132, 127, 'g', 0xA6FF00));
 				setExtrasPos();
 			case NONE: // nothing
+			case ONE:  // nothing
+			case TWO: //also nothing
+			case THREE: //I call this Super Saiyan Thre- I mean nothing
+			case FIVE: //nothing again
+			case SIX: //again
+			case SEVEN: //Seriously?
+			case EIGHT: //Bro what if I had to do 18 keys again huh this is getting repetitive
+			case NINE: //Finally that should be all for now
 		}
 
 		scrollFactor.set();
