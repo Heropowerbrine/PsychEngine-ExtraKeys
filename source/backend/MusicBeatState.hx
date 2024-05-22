@@ -72,7 +72,7 @@ class MusicBeatState extends FlxUIState
 
 	public function addHitbox(DefaultDrawTarget:Bool = true,mania:Int)
 	{
-		var curhitbox:ExtraActions = NONE;
+		var curhitbox:ExtraActions;
 
 		switch (mania){
 			case 0:
@@ -81,8 +81,6 @@ class MusicBeatState extends FlxUIState
 				curhitbox = TWO;
 			case 2:
 				curhitbox = THREE;
-			case 3:
-				curhitbox = NONE;
 			case 4:
 				curhitbox = FIVE;
 			case 5:
