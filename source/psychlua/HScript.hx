@@ -97,6 +97,7 @@ class HScript extends SScript
 		set('PlayState', PlayState);
 		set('Paths', Paths);
 		set('SUtil', SUtil);
+		set('MobileControls', mobile.objects.MobileControls);
 		set('Conductor', Conductor);
 		set('ClientPrefs', ClientPrefs);
 		#if ACHIEVEMENTS_ALLOWED
