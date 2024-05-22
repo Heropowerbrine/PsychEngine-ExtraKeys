@@ -82,4 +82,12 @@ enum ExtraActions
 	SINGLE;
 	DOUBLE;
 	NONE;
+	ONE;
+	TWO;
+	THREE;
+	FIVE;
+	SIX;
+	SEVEN;
+	EIGHT;
+	NINE;
 }
