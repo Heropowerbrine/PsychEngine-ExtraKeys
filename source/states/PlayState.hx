@@ -2366,10 +2366,14 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong()
 	{
-		if SONG.mania != 3
+		if (androidmania != 3)
+		{
 			hitbox.visible = false;
+		}
 		else
+		{
 			mobileControls.visible = false;
+		}
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
 			notes.forEach(function(daNote:Note) {
