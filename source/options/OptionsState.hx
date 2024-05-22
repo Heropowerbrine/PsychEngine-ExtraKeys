@@ -86,20 +86,6 @@ class OptionsState extends MusicBeatState
 
 		addVirtualPad('UP_DOWN', 'A_B_C');
 
-		#if (target.threaded)
-		Thread.create(()->{
-			mutex.acquire();
-
-			for (i in VisualsUISubState.pauseMusics)
-			{
-				if (i.toLowerCase() != "none")
-					Paths.music(Paths.formatToSongPath(i));
-			}
-
-			mutex.release();
-		});
-		#end
-
 		super.create();
 	}
 
