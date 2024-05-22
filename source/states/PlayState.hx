@@ -677,8 +677,8 @@ class PlayState extends MusicBeatState
 			}
 		#end
 
-		if SONG.mania != 3
-			addHitbox(false,SONG.mania);
+		if Main.mania != 3
+			addHitbox(false,Main.mania);
 			hitbox.visible = true;
 		else
 			addMobileControls(false);
