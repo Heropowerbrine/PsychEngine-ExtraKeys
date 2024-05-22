@@ -680,7 +680,7 @@ class PlayState extends MusicBeatState
 			}
 		#end
 
-		if androidmania != 3
+		if (androidmania != 3)
 			addHitbox(false,androidmania);
 			hitbox.visible = true;
 		else
