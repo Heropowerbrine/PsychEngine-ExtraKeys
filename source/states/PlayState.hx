@@ -681,12 +681,16 @@ class PlayState extends MusicBeatState
 		#end
 
 		if (androidmania != 3)
+		{
 			addHitbox(false,androidmania);
 			hitbox.visible = true;
+		}
 		else
+		{
 			addMobileControls(false);
                         mobileControls.visible = true;
-
+		}
+		
 		startCallback();
 		RecalculateRating();
 
