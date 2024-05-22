@@ -121,6 +121,11 @@ class MusicBeatState extends FlxUIState
 			mobileControls = FlxDestroyUtil.destroy(mobileControls);
 			mobileControls = null;
 		}
+		if (hitbox != null)
+		{
+			hitbox = FlxDestroyUtil.destroy(hitbox);
+			hitbox = null;
+		}
 	}
 
 	var _psychCameraInitialized:Bool = false;
