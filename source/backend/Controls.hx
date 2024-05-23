@@ -397,7 +397,6 @@ class Controls
 
 		return result
 			|| _myGamepadJustPressed(gamepadBinds[key]) == true
-			|| mobileCJustPressed(mobileBinds[key]) == true
 			|| virtualPadJustPressed(mobileBinds[key]) == true;
 	}
 
@@ -408,7 +407,6 @@ class Controls
 
 		return result
 			|| _myGamepadPressed(gamepadBinds[key]) == true
-			|| mobileCPressed(mobileBinds[key]) == true
 			|| virtualPadPressed(mobileBinds[key]) == true;
 	}
 
@@ -419,7 +417,6 @@ class Controls
 
 		return result
 			|| _myGamepadJustReleased(gamepadBinds[key]) == true
-			|| mobileCJustReleased(mobileBinds[key]) == true
 			|| virtualPadJustReleased(mobileBinds[key]) == true;
 	}
 
