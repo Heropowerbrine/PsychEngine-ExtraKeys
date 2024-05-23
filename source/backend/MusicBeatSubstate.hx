@@ -30,7 +30,6 @@ class MusicBeatSubstate extends FlxSubState
 
 	public var virtualPad:FlxVirtualPad;
 	public var mobileControls:MobileControls;
-	public var hitbox:FlxHitbox;
 
 	public function addMobileControls(DefaultDrawTarget:Bool = true):Void
 		{
@@ -72,42 +71,6 @@ class MusicBeatSubstate extends FlxSubState
 			FlxG.cameras.add(camControls, DefaultDrawTarget);
 			virtualPad.cameras = [camControls];
 		}
-	}
-
-	public function addHitbox(DefaultDrawTarget:Bool = true,mania:Int)
-	{
-		var curhitbox:ExtraActions = NONE;
-
-		switch (mania){
-			case 0:
-				curhitbox = ONE;
-			case 1:
-				curhitbox = TWO;
-			case 2:
-				curhitbox = THREE;
-			case 3:
-				curhitbox = NONE;
-			case 4:
-				curhitbox = FIVE;
-			case 5:
-				curhitbox = SIX;
-			case 6:
-				curhitbox = SEVEN;
-			case 7:
-				curhitbox = EIGHT;
-			case 8:
-				curhitbox = NINE;
-			default:
-				curhitbox = NONE;
-		}
-		hitbox = new FlxHitbox(curhitbox);
-
-		var camControls = new flixel.FlxCamera();
-		camControls.bgColor.alpha = 0;
-		FlxG.cameras.add(camControls, DefaultDrawTarget);
-		hitbox.cameras = [camControls];
-		hitbox.visible = false;
-		add(hitbox);
 	}
 
 	override function destroy()
