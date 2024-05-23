@@ -77,7 +77,7 @@ class OptionsState extends MusicBeatState
 		changeSelection();
 		ClientPrefs.saveSettings();
 
-		addVirtualPad('UP_DOWN', 'A_B_C');
+		addVirtualPad('UP_DOWN', 'A_B');
 
 		super.create();
 	}
