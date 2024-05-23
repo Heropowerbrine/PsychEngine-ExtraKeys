@@ -26,7 +26,6 @@ class MusicBeatState extends FlxUIState
 	public var mobileControls:MobileControls;
 	public var camControls:FlxCamera;
 	public var vpadCam:FlxCamera;
-	public var hitbox:FlxHitbox;
 
 	public function addVirtualPad(DPad:String, Action:String)
 	{
@@ -70,40 +69,6 @@ class MusicBeatState extends FlxUIState
 		}
 	}
 
-	public function addHitbox(DefaultDrawTarget:Bool = true,mania:Int)
-	{
-		var curhitbox:ExtraActions;
-
-		switch (mania){
-			case 0:
-				curhitbox = ONE;
-			case 1:
-				curhitbox = TWO;
-			case 2:
-				curhitbox = THREE;
-			case 4:
-				curhitbox = FIVE;
-			case 5:
-				curhitbox = SIX;
-			case 6:
-				curhitbox = SEVEN;
-			case 7:
-				curhitbox = EIGHT;
-			case 8:
-				curhitbox = NINE;
-			default:
-				curhitbox = NONE;
-		}
-		hitbox = new FlxHitbox(curhitbox);
-
-		camControls = new FlxCamera();
-		camControls.bgColor.alpha = 0;
-		FlxG.cameras.add(camControls, DefaultDrawTarget);
-		hitbox.cameras = [camControls];
-		hitbox.visible = false;
-		add(hitbox);
-	}
-
 	override function destroy()
 	{
 		super.destroy();
@@ -118,11 +83,6 @@ class MusicBeatState extends FlxUIState
 		{
 			mobileControls = FlxDestroyUtil.destroy(mobileControls);
 			mobileControls = null;
-		}
-		if (hitbox != null)
-		{
-			hitbox = FlxDestroyUtil.destroy(hitbox);
-			hitbox = null;
 		}
 	}
 
