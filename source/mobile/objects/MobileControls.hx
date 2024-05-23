@@ -5,6 +5,7 @@ import flixel.math.FlxPoint;
 import mobile.flixel.input.FlxMobileInputManager;
 import haxe.extern.EitherType;
 import mobile.flixel.FlxButton;
+import flixel.util.FlxSave;
 
 class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager>
 {
@@ -15,6 +16,7 @@ class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager>
 
 	public static var mode(get, set):Int;
 	public static var forcedControl:Null<Int>;
+	public static var save:FlxSave;
 
 	public function new(?forceType:Int, ?extra:Bool = true)
 	{
@@ -69,38 +71,38 @@ class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager>
 
 	public static function setCustomMode(virtualPad:FlxVirtualPad):Void
 	{
-		if (FlxG.save.data.buttons == null)
+		if (save.data.buttons == null)
 		{
-			FlxG.save.data.buttons = new Array();
+			save.data.buttons = new Array();
 			for (buttons in virtualPad)
-				FlxG.save.data.buttons.push(FlxPoint.get(buttons.x, buttons.y));
+				save.data.buttons.push(FlxPoint.get(buttons.x, buttons.y));
 		}
 		else
 		{
 			var tempCount:Int = 0;
 			for (buttons in virtualPad)
 			{
-				FlxG.save.data.buttons[tempCount] = FlxPoint.get(buttons.x, buttons.y);
+				save.data.buttons[tempCount] = FlxPoint.get(buttons.x, buttons.y);
 				tempCount++;
 			}
 		}
 
-		FlxG.save.flush();
+		save.flush();
 	}
 
 	public static function getCustomMode(virtualPad:FlxVirtualPad):FlxVirtualPad
 	{
 		var tempCount:Int = 0;
 
-		if (FlxG.save.data.buttons == null)
+		if (save.data.buttons == null)
 			return virtualPad;
 
 		for (buttons in virtualPad)
 		{
-			if (FlxG.save.data.buttons[tempCount] != null)
+			if (save.data.buttons[tempCount] != null)
 			{
-				buttons.x = FlxG.save.data.buttons[tempCount].x;
-				buttons.y = FlxG.save.data.buttons[tempCount].y;
+				buttons.x = save.data.buttons[tempCount].x;
+				buttons.y = save.data.buttons[tempCount].y;
 			}
 			tempCount++;
 		}
@@ -127,8 +129,8 @@ class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager>
 
 	static function set_mode(mode:Int = 0)
 	{
-		FlxG.save.data.mobileControlsMode = mode;
-		FlxG.save.flush();
+		save.data.mobileControlsMode = mode;
+		save.flush();
 		return mode;
 	}
 
@@ -137,13 +139,13 @@ class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager>
 		if (forcedControl != null)
 			return forcedControl;
 
-		if (FlxG.save.data.mobileControlsMode == null)
+		if (save.data.mobileControlsMode == null)
 		{
-			FlxG.save.data.mobileControlsMode = 0;
-			FlxG.save.flush();
+			save.data.mobileControlsMode = 0;
+			save.flush();
 		}
 
-		return FlxG.save.data.mobileControlsMode;
+		return save.data.mobileControlsMode;
 	}
 
 	public function updateButtonsColors()
@@ -171,18 +173,11 @@ class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager>
 		current.buttonDown.color = buttonsColors[1];
 		current.buttonUp.color = buttonsColors[2];
 		current.buttonRight.color = buttonsColors[3];
+	}
 
-		/*if(mode == 4){
-				hitbox.buttonLeft.color = buttonsColors[0];
-				hitbox.buttonDown.color = buttonsColors[1];
-				hitbox.buttonUp.color = buttonsColors[2];
-				hitbox.buttonRight.color = buttonsColors[3];
-			} else {
-				virtualPad.buttonLeft.color = buttonsColors[0];
-				virtualPad.buttonDown.color = buttonsColors[1];
-				virtualPad.buttonUp.color = buttonsColors[2];
-				virtualPad.buttonRight.color = buttonsColors[3];
-		}*/
+	public static function initSave() {
+		save = new FlxSave();
+		save.bind('MobileControls', CoolUtil.getSavePath());
 	}
 }
 
