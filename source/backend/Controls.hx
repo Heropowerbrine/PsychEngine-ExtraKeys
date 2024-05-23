@@ -514,44 +514,6 @@ class Controls
 		return false;
 	}
 
-	private function mobileCPressed(keys:Array<FlxMobileInputID>):Bool
-	{
-		if (keys != null && requested.mobileControls != null && gameplayRequest != null)
-		{
-			if (gameplayRequest.anyPressed(keys))
-			{
-				controllerMode = true;
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private function mobileCJustPressed(keys:Array<FlxMobileInputID>):Bool
-	{
-		if (keys != null && requested.mobileControls != null && gameplayRequest != null)
-		{
-			if (gameplayRequest.anyJustPressed(keys))
-			{
-				controllerMode = true;
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private function mobileCJustReleased(keys:Array<FlxMobileInputID>):Bool
-	{
-		if (keys != null && requested.mobileControls != null && gameplayRequest != null)
-		{
-			if (gameplayRequest.anyJustReleased(keys))
-			{
-				controllerMode = true;
-				return true;
-			}
-		}
-		return false;
-	}
 
 	@:noCompletion
 	private function get_requested():Dynamic
