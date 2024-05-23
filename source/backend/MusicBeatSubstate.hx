@@ -98,7 +98,7 @@ class MusicBeatSubstate extends FlxSubState
 			case 8:
 				curhitbox = NINE;
 			default:
-				curhitbox = NONE;
+				curhitbox = FOUR;
 		}
 		hitbox = new FlxHitboxEK(curhitbox);
 
@@ -121,10 +121,10 @@ class MusicBeatSubstate extends FlxSubState
 			virtualPad = null;
 		}
 		if (mobileControls != null)
-		{
-			mobileControls = FlxDestroyUtil.destroy(mobileControls);
-			mobileControls = null;
-		}
+			{
+				mobileControls = FlxDestroyUtil.destroy(mobileControls);
+				mobileControls = null;
+			}
 		if (hitbox != null)
 		{
 			hitbox = FlxDestroyUtil.destroy(hitbox);
