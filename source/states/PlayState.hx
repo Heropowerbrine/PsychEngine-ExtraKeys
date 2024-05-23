@@ -181,8 +181,6 @@ class PlayState extends MusicBeatState
 	public var timeBar:Bar;
 	var songPercent:Float = 0;
 
-	public static var androidmania:Int = 0;
-
 	public var ratingsData:Array<Rating> = Rating.loadDefault();
 
 	private var generatedMusic:Bool = false;
@@ -379,7 +377,6 @@ class PlayState extends MusicBeatState
 		
 		Main.mania = SONG.mania;
 		setOnScripts('mania', Main.mania);
-		androidmania = SONG.mania;
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.bpm = SONG.bpm;
@@ -680,17 +677,9 @@ class PlayState extends MusicBeatState
 			}
 		#end
 
-		if (androidmania != 3)
-		{
-			addHitbox(false,androidmania);
-			hitbox.visible = true;
-		}
-		else
-		{
-			addMobileControls(false);
-                        mobileControls.visible = true;
-		}
-		
+		addMobileControls(false);
+                mobileControls.visible = true;
+
 		startCallback();
 		RecalculateRating();
 
@@ -2366,14 +2355,7 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong()
 	{
-		if (androidmania != 3)
-		{
-			hitbox.visible = false;
-		}
-		else
-		{
-			mobileControls.visible = false;
-		}
+		mobileControls.visible = false;
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
 			notes.forEach(function(daNote:Note) {
@@ -3634,4 +3616,82 @@ class PlayState extends MusicBeatState
 		return false;
 	}
 	#end
+	public function makeLuaVirtualPad(DPadMode:String, ActionMode:String) {
+		if(members.contains(luaVirtualPad)) return;
+
+		if(!variables.exists("luaVirtualPad"))
+			variables.set("luaVirtualPad", luaVirtualPad);
+
+		luaVirtualPad = new FlxVirtualPad(DPadMode, ActionMode, NONE);
+		luaVirtualPad.alpha = ClientPrefs.data.controlsAlpha;
+	}
+	
+	public function addLuaVirtualPad() {
+		if(luaVirtualPad == null || members.contains(luaVirtualPad)) return;
+
+		var target = LuaUtils.getTargetInstance();
+		target.insert(target.members.length + 1, luaVirtualPad);
+	}
+
+	public function addLuaVirtualPadCamera() {
+		if(luaVirtualPad != null)
+			luaVirtualPad.cameras = [luaVpadCam];
+	}
+
+	public function removeLuaVirtualPad() {
+		if (luaVirtualPad != null) {
+			luaVirtualPad.kill();
+			luaVirtualPad.destroy();
+			remove(luaVirtualPad);
+			luaVirtualPad = null;
+		}
+	}
+
+	public function luaVirtualPadPressed(button:Dynamic):Bool {
+		if(luaVirtualPad != null) {
+			if(Std.isOfType(button, String))
+				return luaVirtualPad.buttonPressed(FlxMobileInputID.fromString(button));
+			else if(Std.isOfType(button, Array)){
+				var FUCK:Array<String> = button; // haxe said "You Can't Iterate On A Dyanmic Value Please Specificy Iterator or Iterable *insert ned emoji*" so that's the only i foud to fix
+				var idArray:Array<FlxMobileInputID> = [];
+				for(strId in FUCK)
+					idArray.push(FlxMobileInputID.fromString(strId));
+				return luaVirtualPad.anyPressed(idArray);
+			} else
+				return false;
+		}
+		return false;
+	}
+
+	public function luaVirtualPadJustPressed(button:Dynamic):Bool {
+		if(luaVirtualPad != null) {
+			if(Std.isOfType(button, String))
+				return luaVirtualPad.buttonJustPressed(FlxMobileInputID.fromString(button));
+			else if(Std.isOfType(button, Array)){
+				var FUCK:Array<String> = button;
+				var idArray:Array<FlxMobileInputID> = [];
+				for(strId in FUCK)
+					idArray.push(FlxMobileInputID.fromString(strId));
+				return luaVirtualPad.anyJustPressed(idArray);
+			} else
+				return false;
+		}
+		return false;
+	}
+	
+	public function luaVirtualPadJustReleased(button:Dynamic):Bool {
+		if(luaVirtualPad != null) {
+			if(Std.isOfType(button, String))
+				return luaVirtualPad.buttonJustReleased(FlxMobileInputID.fromString(button));
+			else if(Std.isOfType(button, Array)){
+				var FUCK:Array<String> = button;
+				var idArray:Array<FlxMobileInputID> = [];
+				for(strId in FUCK)
+					idArray.push(FlxMobileInputID.fromString(strId));
+				return luaVirtualPad.anyJustReleased(idArray);
+			} else
+				return false;
+		}
+		return false;
+	}
 }
