@@ -129,7 +129,7 @@ class MusicBeatSubstate extends FlxSubState
 		{
 			hitbox = FlxDestroyUtil.destroy(hitbox);
 			hitbox = null;
-			
+		}
 	}
 
 	override function update(elapsed:Float)
