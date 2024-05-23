@@ -120,8 +120,6 @@ class FlxHitboxEK extends FlxMobileInputManager
 		buttonDown = FlxDestroyUtil.destroy(buttonDown);
 		buttonUp = FlxDestroyUtil.destroy(buttonUp);
 		buttonRight = FlxDestroyUtil.destroy(buttonRight);
-		buttonExtra = FlxDestroyUtil.destroy(buttonExtra);
-		buttonExtra2 = FlxDestroyUtil.destroy(buttonExtra2);
 		button5 = FlxDestroyUtil.destroy(button5);
 		button6 = FlxDestroyUtil.destroy(button6);
                 button7 = FlxDestroyUtil.destroy(button7);
