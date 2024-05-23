@@ -122,6 +122,14 @@ class FlxHitboxEK extends FlxMobileInputManager
 		buttonRight = FlxDestroyUtil.destroy(buttonRight);
 		buttonExtra = FlxDestroyUtil.destroy(buttonExtra);
 		buttonExtra2 = FlxDestroyUtil.destroy(buttonExtra2);
+		button5 = FlxDestroyUtil.destroy(button5);
+		button6 = FlxDestroyUtil.destroy(button6);
+                button7 = FlxDestroyUtil.destroy(button7);
+                button8 = FlxDestroyUtil.destroy(button8);
+                button9 = FlxDestroyUtil.destroy(button9);
+
+
+
 	}
 
 	private function createHint(X:Float, Y:Float, Width:Int, Height:Int, Color:Int = 0xFFFFFF):FlxButton
