@@ -683,8 +683,8 @@ class PlayState extends MusicBeatState
 			}
 		#end
 
-		addMobileControls(false);
-                mobileControls.visible = true;
+		addHitbox(SONG.mania);
+                hitbox.visible = true;
 
 		startCallback();
 		RecalculateRating();
@@ -2361,7 +2361,7 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong()
 	{
-		mobileControls.visible = false;
+		hitbox.visible = false;
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
 			notes.forEach(function(daNote:Note) {
