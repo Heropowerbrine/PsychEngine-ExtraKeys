@@ -17,6 +17,7 @@ import backend.Achievements;
 //Mobile Controls 
 import mobile.objects.MobileControls;
 import mobile.flixel.FlxHitbox;
+import mobile.flixel.FlxHitboxEK;
 import mobile.flixel.FlxVirtualPad;
 import mobile.flixel.input.FlxMobileInputID;
 import mobile.backend.MobileData;
