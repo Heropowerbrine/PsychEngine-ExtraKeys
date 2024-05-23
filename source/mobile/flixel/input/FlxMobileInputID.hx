@@ -6,7 +6,6 @@ import flixel.system.macros.FlxMacroUtil;
  * A high-level list of unique values for mobile input buttons.
  * Maps enum values and strings to unique integer codes
  * @author Karim Akra & Lily(mcagabe19)
- * (Modified by Heropowerbrine for Psych Engine Extra Keys)
  */
 @:runtimeValue
 enum abstract FlxMobileInputID(Int) from Int to Int {
@@ -71,11 +70,6 @@ enum abstract FlxMobileInputID(Int) from Int to Int {
 	var noteDOWN = 50;
 	var noteLEFT = 51;
 	var noteRIGHT = 52;
-	var note5 = 53;
-	var note6 = 54;
-	var note7 = 55;
-	var note8 = 56;
-	var note9 = 57;
 
 	@:from
 	public static inline function fromString(s:String) {
