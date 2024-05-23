@@ -264,6 +264,8 @@ class PlayState extends MusicBeatState
 	public var startCallback:Void->Void = null;
 	public var endCallback:Void->Void = null;
 
+	public var luaVirtualPad:FlxVirtualPad;
+
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
