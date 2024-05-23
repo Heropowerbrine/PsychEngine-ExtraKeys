@@ -21,13 +21,6 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		title = 'Mobile Options';
 		rpcTitle = 'Mobile Options Menu'; 
 
-		option = new Option('Extra Controls',
-		'Select how many extra buttons you prefere to have\nThey can be used for mechanics with LUA or HScript.',
-		'extraButtons',
-		'string',
-		exControlTypes);
-		addOption(option);
-
 		#if mobile
 		option = new Option('Allow Phone Screensaver',
 		'If checked, the phone will sleep after going inactive for few seconds.\n(The time depends on your phone\'s options)',
