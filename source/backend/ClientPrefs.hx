@@ -241,10 +241,59 @@ class ClientPrefs {
 		'reset'			=> [BACK]
 	];
 	public static var mobileBinds:Map<String, Array<FlxMobileInputID>> = [
+		'note_1'		=> [noteUP],
+		
+		'note_2a'		=> [noteLEFT],
+		'note_2b'		=> [noteRIGHT],
+		
+		'note_3a'		=> [noteLEFT],
+		'note_3b'		=> [noteUP],
+		'note_3c'		=> [noteRIGHT],
+		
 		'note_up'		=> [noteUP, UP2],
 		'note_left'		=> [noteLEFT, LEFT2],
 		'note_down'		=> [noteDOWN, DOWN2],
 		'note_right'	        => [noteRIGHT, RIGHT2],
+
+		'note_5a'		=> [noteLEFT],
+		'note_5b'		=> [noteDOWN],
+		'note_5c'		=> [note5],
+		'note_5d'		=> [noteUP],
+		'note_5e'		=> [noteRIGHT],
+		
+		'note_6a'		=> [noteLEFT],
+		'note_6b'		=> [noteDOWN],
+		'note_6c'		=> [note5],
+		'note_6d'		=> [note6],
+		'note_6e'		=> [noteUP],
+		'note_6f'		=> [noteRIGHT],
+		
+		'note_7a'		=> [noteLEFT],
+		'note_7b'		=> [noteDOWN],
+		'note_7c'		=> [note5],
+		'note_7d'		=> [note6],
+		'note_7e'		=> [note7],
+		'note_7f'		=> [noteUP],
+		'note_7g'		=> [noteRIGHT],
+		
+		'note_8a'		=> [noteLEFT],
+		'note_8b'		=> [noteDOWN],
+		'note_8c'		=> [note5],
+		'note_8d'		=> [note6],
+		'note_8e'		=> [note7],
+		'note_8f'		=> [note8],
+		'note_8g'		=> [noteUP],
+		'note_8h'		=> [noteRIGHT],
+		
+		'note_9a'		=> [noteLEFT],
+		'note_9b'		=> [noteDOWN],
+		'note_9c'		=> [note5],
+		'note_9d'		=> [note6],
+		'note_9e'		=> [note7],
+		'note_9f'		=> [note8],
+		'note_9g'		=> [note9],
+		'note_9h'		=> [noteUP],
+		'note_9i'		=> [noteRIGHT],
 
 		'ui_up'			=> [UP, noteUP],
 		'ui_left'		=> [LEFT, noteLEFT],
