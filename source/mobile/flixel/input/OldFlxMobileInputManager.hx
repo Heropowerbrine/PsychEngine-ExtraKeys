@@ -8,7 +8,7 @@ import haxe.ds.Map;
 /**
  * A FlxButton group with functions for input handling 
  */
-class FlxMobileInputManager extends FlxTypedSpriteGroup<FlxButton>
+class OldFlxMobileInputManager extends FlxTypedSpriteGroup<FlxButton>
 {
 	/**
 	 * A map to keep track of all the buttons using it's ID
