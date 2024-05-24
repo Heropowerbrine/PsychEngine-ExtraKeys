@@ -2,7 +2,7 @@ package mobile.objects;
 
 import haxe.ds.Map;
 import flixel.math.FlxPoint;
-import mobile.flixel.input.FlxMobileInputManager;
+import mobile.flixel.input.OldFlxMobileInputManager;
 import haxe.extern.EitherType;
 import mobile.flixel.FlxButton;
 import flixel.util.FlxSave;
