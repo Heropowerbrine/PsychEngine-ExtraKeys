@@ -6,8 +6,11 @@ import mobile.flixel.input.FlxMobileInputManager;
 import haxe.extern.EitherType;
 import mobile.flixel.FlxButton;
 import flixel.util.FlxSave;
+import mobile.flixel.FlxHitbox.HitboxButton;
+import mobile.flixel.FlxVirtualPad.TouchPadButton;
+import flixel.util.typeLimit.OneOfTwo;
 
-class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager>
+class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager<Dynamic>>
 {
 	public var virtualPad:FlxVirtualPad = new FlxVirtualPad('NONE', 'NONE', NONE);
 	public var hitbox:FlxHitbox = new FlxHitbox(NONE);
@@ -184,13 +187,13 @@ class MobileControls extends FlxTypedSpriteGroup<FlxMobileInputManager>
 
 class CurrentManager
 {
-	public var buttonLeft:FlxButton;
-	public var buttonDown:FlxButton;
-	public var buttonUp:FlxButton;
-	public var buttonRight:FlxButton;
-	public var buttonExtra:FlxButton;
-	public var buttonExtra2:FlxButton;
-	public var target:FlxMobileInputManager;
+	public var buttonLeft:TouchButton;
+	public var buttonDown:TouchButton;
+	public var buttonUp:TouchButton;
+	public var buttonRight:TouchButton;
+	public var buttonExtra:TouchButton;
+	public var buttonExtra2:TouchButton;
+	public var target:FlxMobileInputManager<Dynamic>;
 
 	public function new(control:MobileControls)
 	{
