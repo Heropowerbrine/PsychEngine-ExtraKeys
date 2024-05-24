@@ -26,22 +26,22 @@ enum HitboxType {
     NINE;
 }
 
-class FlxHitboxEK extends FlxMobileInputManager<HitboxButton>
+class FlxHitboxEK extends FlxMobileInputManager<HitboxButtonEK>
 {
 	final offsetFir:Int = (ClientPrefs.data.hitbox2 ? Std.int(FlxG.height / 4) * 3 : 0);
 	final offsetSec:Int = (ClientPrefs.data.hitbox2 ? 0 : Std.int(FlxG.height / 4));
 
-	public var buttonLeft:HitboxButton = new HitboxButton(0, 0, [FlxMobileInputID.hitboxLEFT, FlxMobileInputID.noteLEFT]);
-	public var buttonDown:HitboxButton = new HitboxButton(0, 0, [FlxMobileInputID.hitboxDOWN, FlxMobileInputID.noteDOWN]);
-	public var buttonUp:HitboxButton = new HitboxButton(0, 0, [FlxMobileInputID.hitboxUP, FlxMobileInputID.noteUP]);
-	public var buttonRight:HitboxButton = new HitboxButton(0, 0, [FlxMobileInputID.hitboxRIGHT, FlxMobileInputID.noteRIGHT]);
-	public var buttonExtra:HitboxButton = new HitboxButton(0, 0);
-	public var buttonExtra2:HitboxButton = new HitboxButton(0, 0);
-	public var button5:HitboxButton = new HitboxButton(0, 0, [FlxMobileInputID.note5]);
-	public var button6:HitboxButton = new HitboxButton(0, 0, [FlxMobileInputID.note6]);
-	public var button7:HitboxButton = new HitboxButton(0, 0, [FlxMobileInputID.note7]);
-	public var button8:HitboxButton = new HitboxButton(0, 0, [FlxMobileInputID.note8]);
-	public var button9:HitboxButton = new HitboxButton(0, 0, [FlxMobileInputID.note9]);
+	public var buttonLeft:HitboxButtonEK = new HitboxButtonEK(0, 0, [FlxMobileInputID.hitboxLEFT, FlxMobileInputID.noteLEFT]);
+	public var buttonDown:HitboxButtonEK = new HitboxButtonEK(0, 0, [FlxMobileInputID.hitboxDOWN, FlxMobileInputID.noteDOWN]);
+	public var buttonUp:HitboxButtonEK = new HitboxButtonEK(0, 0, [FlxMobileInputID.hitboxUP, FlxMobileInputID.noteUP]);
+	public var buttonRight:HitboxButtonEK = new HitboxButtonEK(0, 0, [FlxMobileInputID.hitboxRIGHT, FlxMobileInputID.noteRIGHT]);
+	public var buttonExtra:HitboxButtonEK = new HitboxButtonEK(0, 0);
+	public var buttonExtra2:HitboxButtonEK = new HitboxButtonEK(0, 0);
+	public var button5:HitboxButtonEK = new HitboxButtonEK(0, 0, [FlxMobileInputID.note5]);
+	public var button6:HitboxButtonEK = new HitboxButtonEK(0, 0, [FlxMobileInputID.note6]);
+	public var button7:HitboxButtonEK = new HitboxButtonEK(0, 0, [FlxMobileInputID.note7]);
+	public var button8:HitboxButtonEK = new HitboxButtonEK(0, 0, [FlxMobileInputID.note8]);
+	public var button9:HitboxButtonEK = new HitboxButtonEK(0, 0, [FlxMobileInputID.note9]);
 
 	var storedButtonsIDs:Map<String, Array<FlxMobileInputID>> = new Map<String, Array<FlxMobileInputID>>();
 
@@ -54,7 +54,7 @@ class FlxHitboxEK extends FlxMobileInputManager<HitboxButton>
 
 		for (button in Reflect.fields(this))
 		{
-			if (Std.isOfType(Reflect.field(this, button), HitboxButton))
+			if (Std.isOfType(Reflect.field(this, button), HitboxButtonEK))
 				storedButtonsIDs.set(button, Reflect.getProperty(Reflect.field(this, button), 'IDs'));
 		}
 
@@ -118,7 +118,7 @@ class FlxHitboxEK extends FlxMobileInputManager<HitboxButton>
 
 		for (button in Reflect.fields(this))
 		{
-			if (Std.isOfType(Reflect.field(this, button), HitboxButton))
+			if (Std.isOfType(Reflect.field(this, button), HitboxButtonEK))
 				Reflect.setProperty(Reflect.getProperty(this, button), 'IDs', storedButtonsIDs.get(button));
 		}
 		scrollFactor.set();
@@ -143,9 +143,9 @@ class FlxHitboxEK extends FlxMobileInputManager<HitboxButton>
                 button9 = FlxDestroyUtil.destroy(button9);
 	}
 
-	private function createHint(X:Float, Y:Float, Width:Int, Height:Int, Color:Int = 0xFFFFFF):HitboxButton
+	private function createHint(X:Float, Y:Float, Width:Int, Height:Int, Color:Int = 0xFFFFFF):HitboxButtonEK
 	{
-		var hint = new HitboxButton(X, Y, null, Width, Height);
+		var hint = new HitboxButtonEK(X, Y, null, Width, Height);
 		hint.color = Color;
 		#if FLX_DEBUG
 		hint.ignoreDrawDebug = true;
@@ -154,7 +154,7 @@ class FlxHitboxEK extends FlxMobileInputManager<HitboxButton>
 	}
 }
 
-class HitboxButton extends TouchButton
+class HitboxButtonEK extends TouchButton
 {
 	public static var hitboxesGraphics:Int = -1;
 
