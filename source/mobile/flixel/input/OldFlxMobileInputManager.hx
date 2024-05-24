@@ -94,7 +94,7 @@ class OldFlxMobileInputManager extends FlxTypedSpriteGroup<FlxButton>
 	 * @param	state		The button state to check for.
 	 * @return	Whether the provided key has the specified status.
 	 */
-	public function checkStatus(button:FlxMobileInputID, state:ButtonsStates = JUST_PRESSED):Bool
+	public function checkStatus(button:FlxMobileInputID, state:OldButtonsStates = JUST_PRESSED):Bool
 	{
 		switch (button)
 		{
@@ -120,7 +120,7 @@ class OldFlxMobileInputManager extends FlxTypedSpriteGroup<FlxButton>
 	 * @param	state		The button state to check for
 	 * @return	Whether at least one of the buttons has the specified status
 	 */
-	function checkButtonArrayState(Buttons:Array<FlxMobileInputID>, state:ButtonsStates = JUST_PRESSED):Bool
+	function checkButtonArrayState(Buttons:Array<FlxMobileInputID>, state:OldButtonsStates = JUST_PRESSED):Bool
 	{
 		if (Buttons == null)
 			return false;
@@ -132,7 +132,7 @@ class OldFlxMobileInputManager extends FlxTypedSpriteGroup<FlxButton>
 		return false;
 	}
 
-	function checkStatusUnsafe(button:FlxMobileInputID, state:ButtonsStates = JUST_PRESSED):Bool
+	function checkStatusUnsafe(button:FlxMobileInputID, state:OldButtonsStates = JUST_PRESSED):Bool
 	{
 		return switch (state)
 		{
@@ -161,7 +161,7 @@ class OldFlxMobileInputManager extends FlxTypedSpriteGroup<FlxButton>
 	}
 }
 
-enum ButtonsStates
+enum OldButtonsStates
 {
 	PRESSED;
 	JUST_PRESSED;
