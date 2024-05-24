@@ -2,28 +2,26 @@ package mobile.flixel;
 
 import mobile.flixel.input.FlxMobileInputManager;
 import openfl.display.BitmapData;
-import mobile.objects.TouchButton;
+import mobile.flixel.FlxButton;
 import openfl.display.Shape;
-import mobile.objects.TouchButton;
-import flixel.graphics.FlxGraphic;
 
 /**
  * A zone with 4 hint's (A hitbox).
  * It's really easy to customize the layout.
  *
- * @author: Mihai Alexandru and Karim Akra
+ * @author: Mihai Alexandru, Karim Akra & Lily (mcagabe19)
  */
-class FlxHitbox extends FlxMobileInputManager<HitboxButton>
+class FlxHitbox extends FlxMobileInputManager
 {
 	final offsetFir:Int = (ClientPrefs.data.hitbox2 ? Std.int(FlxG.height / 4) * 3 : 0);
 	final offsetSec:Int = (ClientPrefs.data.hitbox2 ? 0 : Std.int(FlxG.height / 4));
 
-	public var buttonLeft:HitboxButton = new HitboxButton(0, 0, [FlxMobileInputID.hitboxLEFT, FlxMobileInputID.noteLEFT]);
-	public var buttonDown:HitboxButton = new HitboxButton(0, 0, [FlxMobileInputID.hitboxDOWN, FlxMobileInputID.noteDOWN]);
-	public var buttonUp:HitboxButton = new HitboxButton(0, 0, [FlxMobileInputID.hitboxUP, FlxMobileInputID.noteUP]);
-	public var buttonRight:HitboxButton = new HitboxButton(0, 0, [FlxMobileInputID.hitboxRIGHT, FlxMobileInputID.noteRIGHT]);
-	public var buttonExtra:HitboxButton = new HitboxButton(0, 0);
-	public var buttonExtra2:HitboxButton = new HitboxButton(0, 0);
+	public var buttonLeft:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.hitboxLEFT, FlxMobileInputID.noteLEFT]);
+	public var buttonDown:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.hitboxDOWN, FlxMobileInputID.noteDOWN]);
+	public var buttonUp:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.hitboxUP, FlxMobileInputID.noteUP]);
+	public var buttonRight:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.hitboxRIGHT, FlxMobileInputID.noteRIGHT]);
+	public var buttonExtra:FlxButton = new FlxButton(0, 0);
+	public var buttonExtra2:FlxButton = new FlxButton(0, 0);
 
 	var storedButtonsIDs:Map<String, Array<FlxMobileInputID>> = new Map<String, Array<FlxMobileInputID>>();
 
@@ -36,7 +34,7 @@ class FlxHitbox extends FlxMobileInputManager<HitboxButton>
 
 		for (button in Reflect.fields(this))
 		{
-			if (Std.isOfType(Reflect.field(this, button), HitboxButton))
+			if (Std.isOfType(Reflect.field(this, button), FlxButton))
 				storedButtonsIDs.set(button, Reflect.getProperty(Reflect.field(this, button), 'IDs'));
 		}
 
@@ -66,7 +64,7 @@ class FlxHitbox extends FlxMobileInputManager<HitboxButton>
 
 		for (button in Reflect.fields(this))
 		{
-			if (Std.isOfType(Reflect.field(this, button), HitboxButton))
+			if (Std.isOfType(Reflect.field(this, button), FlxButton))
 				Reflect.setProperty(Reflect.getProperty(this, button), 'IDs', storedButtonsIDs.get(button));
 		}
 		scrollFactor.set();
@@ -88,114 +86,84 @@ class FlxHitbox extends FlxMobileInputManager<HitboxButton>
 		buttonExtra2 = FlxDestroyUtil.destroy(buttonExtra2);
 	}
 
-	private function createHint(X:Float, Y:Float, Width:Int, Height:Int, Color:Int = 0xFFFFFF):HitboxButton
+	private function createHint(X:Float, Y:Float, Width:Int, Height:Int, Color:Int = 0xFFFFFF):FlxButton
 	{
-		var hint = new HitboxButton(X, Y, null, Width, Height);
+		var hintTween:FlxTween = null;
+		var hint = new FlxButton(X, Y);
+		hint.loadGraphic(createHintGraphic(Width, Height));
 		hint.color = Color;
+		hint.solid = false;
+		hint.immovable = true;
+		hint.multiTouch = true;
+		hint.moves = false;
+		hint.scrollFactor.set();
+		hint.alpha = 0.00001;
+		hint.antialiasing = ClientPrefs.data.antialiasing;
+		if (!ClientPrefs.data.hideHitboxHints)
+		{
+			hint.onDown.callback = function()
+			{
+				if (hintTween != null)
+					hintTween.cancel();
+
+				hintTween = FlxTween.tween(hint, {alpha: ClientPrefs.data.controlsAlpha}, ClientPrefs.data.controlsAlpha / 100, {
+					ease: FlxEase.circInOut,
+					onComplete: function(twn:FlxTween)
+					{
+						hintTween = null;
+					}
+				});
+			}
+			hint.onUp.callback = function()
+			{
+				if (hintTween != null)
+					hintTween.cancel();
+
+				hintTween = FlxTween.tween(hint, {alpha: 0.00001}, ClientPrefs.data.controlsAlpha / 10, {
+					ease: FlxEase.circInOut,
+					onComplete: function(twn:FlxTween)
+					{
+						hintTween = null;
+					}
+				});
+			}
+			hint.onOut.callback = function()
+			{
+				if (hintTween != null)
+					hintTween.cancel();
+
+				hintTween = FlxTween.tween(hint, {alpha: 0.00001}, ClientPrefs.data.controlsAlpha / 10, {
+					ease: FlxEase.circInOut,
+					onComplete: function(twn:FlxTween)
+					{
+						hintTween = null;
+					}
+				});
+			}
+		}
 		#if FLX_DEBUG
 		hint.ignoreDrawDebug = true;
 		#end
 		return hint;
 	}
-}
 
-class HitboxButton extends TouchButton
-{
-	public static var hitboxesGraphics:Int = -1;
-
-	public function new(x:Float, y:Float, ?IDs:Array<FlxMobileInputID>, ?width:Int, ?height:Int){
-		super(x, y, IDs);
-		statusAlphas = [];
-		statusIndicatorType = NONE;
-		var fullLoad:Bool = true;
-		if(width == null || height == null)
-			fullLoad = false;
-		if(fullLoad){
-			loadGraphic(createHintGraphic(width, height));
-			solid = false;
-			immovable = true;
-			multiTouch = true;
-			moves = false;
-			alpha = 0.00001;
-			antialiasing = ClientPrefs.data.antialiasing;
-			var hintTween:FlxTween = null;
-			if (ClientPrefs.data.hitboxType != "Hidden")
-			{
-				onDown.callback = function()
-				{
-					if (hintTween != null)
-						hintTween.cancel();
-
-					hintTween = FlxTween.tween(this, {alpha: ClientPrefs.data.controlsAlpha}, ClientPrefs.data.controlsAlpha / 100, {
-						ease: FlxEase.circInOut,
-						onComplete: function(twn:FlxTween)
-						{
-							hintTween = null;
-						}
-					});
-				}
-				onUp.callback = function()
-				{
-					if (hintTween != null)
-						hintTween.cancel();
-
-					hintTween = FlxTween.tween(this, {alpha: 0.00001}, ClientPrefs.data.controlsAlpha / 10, {
-						ease: FlxEase.circInOut,
-						onComplete: function(twn:FlxTween)
-						{
-							hintTween = null;
-						}
-					});
-				}
-				onOut.callback = function()
-				{
-					if (hintTween != null)
-						hintTween.cancel();
-
-					hintTween = FlxTween.tween(this, {alpha: 0.00001}, ClientPrefs.data.controlsAlpha / 10, {
-						ease: FlxEase.circInOut,
-						onComplete: function(twn:FlxTween)
-						{
-							hintTween = null;
-						}
-					});
-				}
-			}
-		}
-	}
-
-	function createHintGraphic(Width:Int, Height:Int):FlxGraphic
+	function createHintGraphic(Width:Int, Height:Int):BitmapData
 	{
-		for(index in 0...hitboxesGraphics){
-			if(FlxG.bitmap.get('hitbox$index') != null){
-				var graphic = FlxG.bitmap.get('hitbox$index');
-				if(graphic.width == Width && graphic.height == Height){
-					return graphic;
-				}
-			}
-		}
-		hitboxesGraphics++;
 		var guh = ClientPrefs.data.controlsAlpha;
 		if (guh >= 0.9)
 			guh = ClientPrefs.data.controlsAlpha - 0.07;
 		var shape:Shape = new Shape();
 		shape.graphics.beginFill(0xFFFFFF);
-		if (ClientPrefs.data.hitboxType == 'Gradient') {
-			shape.graphics.lineStyle(3, 0xFFFFFF, 1);
-			shape.graphics.drawRect(0, 0, Width, Height);
-			shape.graphics.lineStyle(0, 0, 0);
-			shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
-			shape.graphics.endFill();
-			shape.graphics.beginGradientFill(RADIAL, [0xFFFFFF, FlxColor.TRANSPARENT], [guh, 0], [0, 255], null, null, null, 0.5);
-			shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
-			shape.graphics.endFill();
-		} else {
-			shape.graphics.lineStyle(10, 0xFFFFFF, 1);
-			shape.graphics.drawRect(0, 0, Width, Height);
-			shape.graphics.endFill();
-		}
+		shape.graphics.lineStyle(3, 0xFFFFFF, 1);
+		shape.graphics.drawRect(0, 0, Width, Height);
+		shape.graphics.lineStyle(0, 0, 0);
+		shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
+		shape.graphics.endFill();
+		shape.graphics.beginGradientFill(RADIAL, [0xFFFFFF, FlxColor.TRANSPARENT], [guh, 0], [0, 255], null, null, null, 0.5);
+		shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
+		shape.graphics.endFill();
 		var bitmap:BitmapData = new BitmapData(Width, Height, true, 0);
 		bitmap.draw(shape);
-		return FlxG.bitmap.add(bitmap, false, 'hitbox$hitboxesGraphics');
+		return bitmap;
 	}
-}
+		}
