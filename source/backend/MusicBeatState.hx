@@ -98,10 +98,10 @@ class MusicBeatState extends FlxUIState
 		}
 		hitbox = new FlxHitboxEK(curhitbox);
 
-		camControls = new FlxCamera();
-		camControls.bgColor.alpha = 0;
-		FlxG.cameras.add(camControls, DefaultDrawTarget);
-		hitbox.cameras = [camControls];
+		var hitboxcamControls = new FlxCamera();
+		hitboxcamControls.bgColor.alpha = 0;
+		FlxG.cameras.add(hitboxcamControls, DefaultDrawTarget);
+		hitbox.cameras = [hitboxcamControls];
 		hitbox.visible = false;
 		add(hitbox);
 	}
