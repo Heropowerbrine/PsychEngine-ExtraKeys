@@ -1,6 +1,6 @@
 package mobile.flixel;
 
-import mobile.flixel.input.FlxMobileInputManager;
+import mobile.flixel.input.OldFlxMobileInputManager;
 import openfl.display.BitmapData;
 import mobile.flixel.FlxButton;
 import openfl.display.Shape;
@@ -11,7 +11,7 @@ import openfl.display.Shape;
  *
  * @author: Mihai Alexandru, Karim Akra & Lily (mcagabe19)
  */
-class FlxHitbox extends FlxMobileInputManager
+class FlxHitbox extends OldFlxMobileInputManager
 {
 	final offsetFir:Int = (ClientPrefs.data.hitbox2 ? Std.int(FlxG.height / 4) * 3 : 0);
 	final offsetSec:Int = (ClientPrefs.data.hitbox2 ? 0 : Std.int(FlxG.height / 4));
