@@ -2,7 +2,7 @@ package mobile.flixel;
 
 import haxe.io.Path;
 import flixel.graphics.frames.FlxTileFrames;
-import mobile.flixel.input.FlxMobileInputManager;
+import mobile.flixel.input.OldFlxMobileInputManager;
 import mobile.flixel.FlxButton;
 import flixel.math.FlxPoint;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -17,7 +17,7 @@ import openfl.display.BitmapData;
  *
  * @author Ka Wing Chin, Mihai Alexandru, Karim Akra & Lily (mcagabe19)
  */
-class FlxVirtualPad extends FlxMobileInputManager {
+class FlxVirtualPad extends OldFlxMobileInputManager {
 	public var buttonLeft:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.LEFT, FlxMobileInputID.noteLEFT]);
 	public var buttonUp:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.UP, FlxMobileInputID.noteUP]);
 	public var buttonRight:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.RIGHT, FlxMobileInputID.noteRIGHT]);
