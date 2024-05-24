@@ -190,7 +190,7 @@ class CurrentManager
 	public var buttonRight:FlxButton;
 	public var buttonExtra:FlxButton;
 	public var buttonExtra2:FlxButton;
-	public var target:FlxMobileInputManager;
+	public var target:OldFlxMobileInputManager;
 
 	public function new(control:MobileControls)
 	{
